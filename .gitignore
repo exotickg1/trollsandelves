@@ -1,11 +1,28 @@
-# Build and Release Folders
-bin/
-bin-debug/
-bin-release/
+# Author - MNoya, from DotaCraft Repository
+# Cache crap that Valve autogenerates
+*.bin
 
-# Other files and folders
-.settings/
+# Compiled formats
+*.vpcf_c
+*.vtex_c
+*.vsndevts_c
+*.vsnd_c
+*.vmat_c
+*.vjs_c
+*.vxml_c
+*.vcss_c
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Commit panorama compiled textures
+!game/dota_addons/trollsandelves/panorama/images/*.vtex_c
+!game/dota_addons/trollsandelves/panorama/images/custom_game/*.vtex_c
+
+# Map files
+*.vpk
+
+# Map overviews
+content/dota_addons/trollsandelves/materials/overviews/*.vmat
+content/dota_addons/trollsandelves/materials/overviews/*.txt
+game/dota_addons/trollsandelves/resource/overviews/*
+
+#Github dump
+*.stackdump
