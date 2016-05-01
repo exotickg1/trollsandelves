@@ -8,15 +8,17 @@ Thanks!
 
 ### Most Important ToDo
 * Make all towers for an Elves and Huts for Troll.
-* Make upgrades for this towers.
-* Make Lumber, Food (need only for Workers, who heal the towers)
+* Make towers upgradable.
+* Make Lumber, Food (need only for Workers, who heal the towers).
+* Make new Units (Bear and Crystal Maiden).
 * Make Troll shop inaccessible for Elves.
-* Map design
+* Map design.
 
 ### Credits
 * [Myll](https://github.com/Myll), [MNoya](https://github.com/MNoya) for Building Helper.
 * [BMD](https://github.com/bmddota) for Barebones.
 
 ### Community
-* [Dota 2 Developers Russian Community](https://customgames.ru/)
+* [ModDota Thread] (https://moddota.com/forums/discussion/1490/troll-vs-elves)
+* [Dota 2 Developers Russian Community Thread](https://customgames.ru/forum/index.php?topic=845.0)
 * [VK group](https://vk.com/trollsandelves)
