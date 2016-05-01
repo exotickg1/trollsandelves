@@ -1907,6 +1907,463 @@
   }
 
   //--------------------------------
+  // Health regen items:
+  //--------------------------------
+  "item_trollsandelves_regen1"
+  {
+    "ID"                    "2041"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "100"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "badge_of_life"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "4"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen1"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen2"
+  {
+    "ID"                    "2042"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen2"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "badge_of_the_moon"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "8"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen2"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen3"
+  {
+    "ID"                    "2043"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen3"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "badge_of_the_night"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "16"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen3"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen4"
+  {
+    "ID"                    "2044"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen4"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "twilight_badge"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "32"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen4"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen5"
+  {
+    "ID"                    "2045"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "1600"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "sleep_parchment"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "64"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen5"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen6"
+  {
+    "ID"                    "2046"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen6"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "3200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "scroll_of_sweet_nights"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "128"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen6"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen7"
+  {
+    "ID"                    "2047"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen7"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "6400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "sleepless_nights_parchment"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "256"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen7"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen8"
+  {
+    "ID"                    "2048"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen8"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "12800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "nightmares_parchment"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "512"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen8"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen9"
+  {
+    "ID"                    "2049"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen9"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "1"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "calamitous_potion"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "2560"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen9"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen10"
+  {
+    "ID"                    "2050"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen10"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "2"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "calamitous_potion_ultra"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "5120"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen10"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen11"
+  {
+    "ID"                    "2051"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen11"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "8"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "calamitous_potion_ultimate"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "20480"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen11"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  //--------------------------------
   //Delete Original Dota Items
   //--------------------------------
     "item_blink"                            "REMOVE"
@@ -2045,85 +2502,85 @@
     "item_recipe_sphere"                    "REMOVE"
     "item_sphere"                           "REMOVE"
     "item_recipe_reflex_energy_regen_booster"   "REMOVE"
-    "item_vanguard"                 "REMOVE"
-    "item_recipe_blade_mail"                        "REMOVE"
+    "item_vanguard"                         "REMOVE"
+    "item_recipe_blade_mail"                "REMOVE"
     "item_blade_mail"                       "REMOVE"
-    "item_recipe_soul_booster"                      "REMOVE"
+    "item_recipe_soul_booster"              "REMOVE"
     "item_soul_booster"                     "REMOVE"
-    "item_recipe_hood_of_defiance"                  "REMOVE"
+    "item_recipe_hood_of_defiance"          "REMOVE"
     "item_hood_of_defiance"                 "REMOVE"
     "item_recipe_rapier"                    "REMOVE"
-    "item_rapier"                   "REMOVE"
-    "item_recipe_monkey_king_bar"                   "REMOVE"
+    "item_rapier"                           "REMOVE"
+    "item_recipe_monkey_king_bar"           "REMOVE"
     "item_monkey_king_bar"                  "REMOVE"
     "item_recipe_radiance"                  "REMOVE"
-    "item_radiance"                 "REMOVE"
+    "item_radiance"                         "REMOVE"
     "item_recipe_butterfly"                 "REMOVE"
     "item_butterfly"                        "REMOVE"
-    "item_recipe_greater_crit"                      "REMOVE"
+    "item_recipe_greater_crit"              "REMOVE"
     "item_greater_crit"                     "REMOVE"
     "item_recipe_basher"                    "REMOVE"
-    "item_basher"                   "REMOVE"
+    "item_basher"                           "REMOVE"
     "item_recipe_bfury"                     "REMOVE"
-    "item_bfury"                    "REMOVE"
+    "item_bfury"                            "REMOVE"
     "item_recipe_manta"                     "REMOVE"
-    "item_manta"                    "REMOVE"
-    "item_recipe_lesser_crit"                       "REMOVE"
+    "item_manta"                            "REMOVE"
+    "item_recipe_lesser_crit"               "REMOVE"
     "item_lesser_crit"                      "REMOVE"
     "item_recipe_armlet"                    "REMOVE"
-    "item_armlet"                   "REMOVE"
-    "item_recipe_invis_sword"                       "REMOVE"
+    "item_armlet"                           "REMOVE"
+    "item_recipe_invis_sword"               "REMOVE"
     "item_invis_sword"                      "REMOVE"
-    "item_recipe_sange_and_yasha"                   "REMOVE"
+    "item_recipe_sange_and_yasha"           "REMOVE"
     "item_sange_and_yasha"                  "REMOVE"
     "item_recipe_satanic"                   "REMOVE"
-    "item_satanic"                  "REMOVE"
+    "item_satanic"                          "REMOVE"
     "item_recipe_mjollnir"                  "REMOVE"
-    "item_mjollnir"                 "REMOVE"
+    "item_mjollnir"                         "REMOVE"
     "item_recipe_skadi"                     "REMOVE"
-    "item_skadi"                    "REMOVE"
+    "item_skadi"                            "REMOVE"
     "item_recipe_sange"                     "REMOVE"
-    "item_sange"                    "REMOVE"
-    "item_recipe_helm_of_the_dominator"                     "REMOVE"
-    "item_helm_of_the_dominator"                    "REMOVE"
+    "item_sange"                            "REMOVE"
+    "item_recipe_helm_of_the_dominator"     "REMOVE"
+    "item_helm_of_the_dominator"            "REMOVE"
     "item_recipe_maelstrom"                 "REMOVE"
     "item_maelstrom"                        "REMOVE"
     "item_recipe_desolator"                 "REMOVE"
     "item_desolator"                        "REMOVE"
     "item_recipe_yasha"                     "REMOVE"
-    "item_yasha"                    "REMOVE"
-    "item_recipe_mask_of_madness"                   "REMOVE"
+    "item_yasha"                            "REMOVE"
+    "item_recipe_mask_of_madness"           "REMOVE"
     "item_mask_of_madness"                  "REMOVE"
-    "item_recipe_diffusal_blade"                    "REMOVE"
-    "item_recipe_diffusal_blade_2"                  "REMOVE"
+    "item_recipe_diffusal_blade"            "REMOVE"
+    "item_recipe_diffusal_blade_2"          "REMOVE"
     "item_diffusal_blade"                   "REMOVE"
     "item_diffusal_blade_2"                 "REMOVE"
-    "item_recipe_ethereal_blade"                    "REMOVE"
+    "item_recipe_ethereal_blade"            "REMOVE"
     "item_ethereal_blade"                   "REMOVE"
     "item_recipe_soul_ring"                 "REMOVE"
     "item_soul_ring"                        "REMOVE"
-    "item_recipe_arcane_boots"                      "REMOVE"
+    "item_recipe_arcane_boots"              "REMOVE"
     "item_arcane_boots"                     "REMOVE"
     "item_orb_of_venom"                     "REMOVE"
-    "item_recipe_ancient_janggo"                    "REMOVE"
+    "item_recipe_ancient_janggo"            "REMOVE"
     "item_ancient_janggo"                   "REMOVE"
-    "item_recipe_medallion_of_courage"                      "REMOVE"
-    "item_medallion_of_courage"                     "REMOVE"
+    "item_recipe_medallion_of_courage"      "REMOVE"
+    "item_medallion_of_courage"             "REMOVE"
     "item_smoke_of_deceit"                  "REMOVE"
-    "item_recipe_veil_of_discord"                   "REMOVE"
+    "item_recipe_veil_of_discord"           "REMOVE"
     "item_veil_of_discord"                  "REMOVE"
-    "item_recipe_rod_of_atos"                       "REMOVE"
+    "item_recipe_rod_of_atos"               "REMOVE"
     "item_rod_of_atos"                      "REMOVE"
-    "item_recipe_abyssal_blade"                     "REMOVE"
+    "item_recipe_abyssal_blade"             "REMOVE"
     "item_abyssal_blade"                    "REMOVE"
-    "item_recipe_heavens_halberd"                   "REMOVE"
+    "item_recipe_heavens_halberd"           "REMOVE"
     "item_heavens_halberd"                  "REMOVE"
-    "item_recipe_ring_of_aquila"                    "REMOVE"
+    "item_recipe_ring_of_aquila"            "REMOVE"
     "item_ring_of_aquila"                   "REMOVE"
-    "item_recipe_tranquil_boots"                    "REMOVE"
+    "item_recipe_tranquil_boots"            "REMOVE"
     "item_tranquil_boots"                   "REMOVE"
     "item_shadow_amulet"                    "REMOVE"
-    "item_halloween_candy_corn"                     "REMOVE"
+    "item_halloween_candy_corn"             "REMOVE"
     "item_mystery_hook"                     "REMOVE"
     "item_mystery_arrow"                    "REMOVE"
     "item_mystery_missile"                  "REMOVE"
@@ -2131,8 +2588,8 @@
     "item_mystery_vacuum"                   "REMOVE"
     "item_halloween_rapier"                 "REMOVE"
     "item_greevil_whistle"                  "REMOVE"
-    "item_greevil_whistle_toggle"                   "REMOVE"
-    "item_present"                  "REMOVE"
+    "item_greevil_whistle_toggle"           "REMOVE"
+    "item_present"                          "REMOVE"
     "item_winter_stocking"                  "REMOVE"
     "item_winter_skates"                    "REMOVE"
     "item_winter_cake"                      "REMOVE"
@@ -2141,7 +2598,20 @@
     "item_winter_ham"                       "REMOVE"
     "item_winter_kringle"                   "REMOVE"
     "item_winter_mushroom"                  "REMOVE"
-    "item_winter_greevil_treat"                     "REMOVE"
-    "item_winter_greevil_garbage"                   "REMOVE"
-    "item_winter_greevil_chewy"                     "REMOVE"
+    "item_winter_greevil_treat"             "REMOVE"
+    "item_winter_greevil_garbage"           "REMOVE"
+    "item_winter_greevil_chewy"             "REMOVE"
+
+    // 6.87 fucking items
+    "item_recipe_bloodthorn"                "REMOVE"
+    "item_bloodthorn"                       "REMOVE"
+    "item_wind_lace"                        "REMOVE"
+    "item_infused_raindrop"                 "REMOVE"
+    "item_blight_stone"                     "REMOVE"
+    "item_recipe_echo_sabre"                "REMOVE"
+    "item_echo_sabre"                       "REMOVE"
+    "item_tome_of_knowledge"                "REMOVE"
+    "item_recipe_hurricane_pike"            "REMOVE"
+    "item_hurricane_pike"                   "REMOVE"
+    "item_banana"                           "REMOVE"
 }

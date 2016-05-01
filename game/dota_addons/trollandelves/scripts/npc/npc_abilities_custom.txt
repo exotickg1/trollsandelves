@@ -7,249 +7,532 @@
 //-------------------
 // Trolls abilities
 //-------------------
-  "troll_plunder"
+"troll_plunder"
+{
+  "BaseClass" "ability_datadriven"
+  "MaxLevel"  "1"
+  "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  "AbilityTextureName"  "alchemist_goblins_greed"
+  "Modifiers"
   {
-    "BaseClass" "ability_datadriven"
-    "MaxLevel"  "1"
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityTextureName"  "alchemist_goblins_greed"
-    "Modifiers"
+    "modifier_plunder"
     {
-      "modifier_plunder"
+      "Passive" "1"
+      "Hidden"  "1"
+      "TextureName" "alchemist_goblins_green"
+      "OnAttackLanded"
       {
-        "Passive" "1"
-        "Hidden"  "1"
-        "TextureName" "alchemist_goblins_green"
-        "OnAttackLanded"
+        "RunScript"
         {
-          "RunScript"
-          {
-            "ScriptFile"  "scripts/vscripts/abilities/ability_plunder.lua"
-            "Function"  "plunder"
-          }
+          "ScriptFile"  "scripts/vscripts/abilities/ability_plunder.lua"
+          "Function"  "plunder"
         }
       }
     }
   }
+}
 
-  "troll_invis"
+"troll_invis"
+{
+  "BaseClass"           "clinkz_wind_walk"
+  "AbilityTextureName"  "clinkz_wind_walk"
+  "MaxLevel"            "1"
+  "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+  "AbilityCastPoint"    "0"
+  "AbilityCooldown"     "35"
+  "AbilityManaCost"     "0"
+  "HotKeyOverride"      "W" 
+
+  "AbilitySpecial"
   {
-    "BaseClass"           "clinkz_wind_walk"
-    "AbilityTextureName"  "clinkz_wind_walk"
-    "MaxLevel"            "1"
-    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-
-    "AbilityCastPoint"    "0"
-    "AbilityCooldown"     "35"
-    "AbilityManaCost"     "0"
-    "HotKeyOverride"      "W" 
-
-    "AbilitySpecial"
-    {
-        "01"
-        {
-          "var_type"  "FIELD_INTEGER"
-          "duration"  "15"
-        }
-        "02"
-        {
-          "var_type"   "FIELD_INTEGER"
-          "bonus_movespeed"    "50"
-        }
-    }
-
-    "Modifiers"
-    {
-        "modifier_troll_invis"
-        {
-          "IsBuff"    "1"
-          "Duration" "%duration"
-
-          "Properties"
-          {
-            "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%bonus_movespeed"
-          }
-
-          "States"
-          {
-            "MODIFIER_STATE_INVISIBLE" "MODIFIER_STATE_VALUE_ENABLED"
-            "MODIFIER_STATE_NO_UNIT_COLLISION" "MODIFIER_STATE_VALUE_ENABLED"
-          }
-        }
-    }
-  }
-
-  "troll_reveal"
-  {
-    "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-    "BaseClass"               "ability_datadriven"
-    "AbilityTextureName"      "courier_shield"
-    "AbilityCastAnimation"    "ACT_DOTA_DISABLED"
-
-    "AbilityManaCost"       "0"
-    "AbilityCooldown"       "45"
-
-    "MaxLevel"            "1"
-
-    "precache"
-    {
-      "particle"  "particles/items_fx/dust_of_appearance.vpcf"
-      "soundfile" "soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
-    }
-
-    "AbilitySpecial"
-    {
       "01"
       {
-        "var_type"        "FIELD_INTEGER"
-        "reveal_radius"   "1200"
+        "var_type"  "FIELD_INTEGER"
+        "duration"  "15"
       }
       "02"
       {
-        "var_type"        "FIELD_INTEGER"
-        "duration"        "6"
+        "var_type"   "FIELD_INTEGER"
+        "bonus_movespeed"    "50"
       }
-    }
+  }
 
-    "precache"
-    {
-      "particle"    "particles/units/heroes/hero_rattletrap/clock_loadout_sparks.vpcf"
-    }
-
-    "OnSpellStart"
-    {
-      "RunScript"
+  "Modifiers"
+  {
+      "modifier_troll_invis"
       {
-        "ScriptFile"    "abilities/reveal.lua"
-        "Function"      "Reveal"
-        "Target"        "POINT"
-      }
+        "IsBuff"    "1"
+        "Duration" "%duration"
 
-      "CreateThinker"
-      {
-        "ModifierName"  "modifier_reveal"
-        "Target"        "POINT"
-      }
-    }
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%bonus_movespeed"
+        }
 
-    "Modifiers"
-    {
-      "modifier_reveal"
-      {   
-        "IsHidden"          "1"
-        "Duration"          "%duration"
-        "Aura"              "modifier_reveal_vision"
-        "Aura_Radius"       "%reveal_radius"
-        "Aura_Teams"        "DOTA_UNIT_TARGET_TEAM_ENEMY"
-        "Aura_Types"        "DOTA_UNIT_TARGET_ALL"
-      }
-
-      "modifier_reveal_vision"
-      {
-        "IsHidden"          "1"
-        "Priority"          "MODIFIER_PRIORITY_ULTRA"
         "States"
         {
-            "MODIFIER_STATE_INVISIBLE"      "MODIFIER_STATE_VALUE_DISABLED"
+          "MODIFIER_STATE_INVISIBLE" "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_UNIT_COLLISION" "MODIFIER_STATE_VALUE_ENABLED"
         }
       }
-    }
   }
+}
 
-  "unit_destroy"
+"troll_reveal"
+{
+  "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "BaseClass"               "ability_datadriven"
+  "AbilityTextureName"      "courier_shield"
+  "AbilityCastAnimation"    "ACT_DOTA_DISABLED"
+
+  "AbilityManaCost"       "0"
+  "AbilityCooldown"       "45"
+
+  "MaxLevel"            "1"
+
+  "precache"
   {
-    // General
-    //-----------------------------
-    "BaseClass"                     "ability_datadriven"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    "MaxLevel"                      "1"
-    "AbilityTextureName"            "sell_tower"
-
-    "OnSpellStart"
-    {
-      "RemoveUnit"
-      {
-        "Target"  "CASTER"
-      }
-
-    }
+    "particle"  "particles/items_fx/dust_of_appearance.vpcf"
+    "soundfile" "soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
   }
 
-  "building_upgrade"
+  "AbilitySpecial"
   {
-    "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "BaseClass"                "ability_datadriven"
-    "AbilityTextureName"       "upgrade_house"
-    "AbilityGoldCost"          "50"
-    "AbilityChannelTime"       "2"
-    "HotKeyOverride"           "A"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "0"
-    "AbilityCooldown"         "0"
-    "AbilityCastAnimation"    "ACT_DOTA_DISABLED"
-    "MaxLevel"                "1"
-
-    // BuildingHelper info
-    "Building"                "1" //bool
-    "BuildingSize"            "2" // this is (3x64) by (3x64) units, so 9 squares.
-    "BuildTime"               ".4"
-    "AbilityCastRange"        "100"
-    "UpdateHealth"            "1" //bool
-    "Scale"                   "1" //bool
-    "MaxScale"                "0.7"
-    "PlayerCanControl"        "1" //bool. Should the player issuing this build command be able to control the building once built?
-    //"CancelsBuildingGhost"      "0" //bool
-    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-    "UnitName"                "elf_house1"
-    "AbilityGoldCost"         "50"
-    // End of BuildingHelper info
-
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "0"
-
-    "AbilitySpecial"
+    "01"
     {
-      "01"
-      {
-        "var_type"        "FIELD_FLOAT"
-        "build_time"      "2.0" 
-      }
-      "02"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "gold_cost"       "50"
-      }
-      "03"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "lumber_cost"     "0"
-      }
+      "var_type"        "FIELD_INTEGER"
+      "reveal_radius"   "1200"
     }
-
-    "OnSpellStart"
+    "02"
     {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/abilities/abiltiy_building_upgrade.lua"
-        "Function"  "OnSpellStart"
-      }
-
+      "var_type"        "FIELD_INTEGER"
+      "duration"        "6"
     }
   }
 
+  "precache"
+  {
+    "particle"    "particles/units/heroes/hero_rattletrap/clock_loadout_sparks.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"    "abilities/reveal.lua"
+      "Function"      "Reveal"
+      "Target"        "POINT"
+    }
+
+    "CreateThinker"
+    {
+      "ModifierName"  "modifier_reveal"
+      "Target"        "POINT"
+    }
+  }
+
+  "Modifiers"
+  {
+    "modifier_reveal"
+    {   
+      "IsHidden"          "1"
+      "Duration"          "%duration"
+      "Aura"              "modifier_reveal_vision"
+      "Aura_Radius"       "%reveal_radius"
+      "Aura_Teams"        "DOTA_UNIT_TARGET_TEAM_ENEMY"
+      "Aura_Types"        "DOTA_UNIT_TARGET_ALL"
+    }
+
+    "modifier_reveal_vision"
+    {
+      "IsHidden"          "1"
+      "Priority"          "MODIFIER_PRIORITY_ULTRA"
+      "States"
+      {
+          "MODIFIER_STATE_INVISIBLE"      "MODIFIER_STATE_VALUE_DISABLED"
+      }
+    }
+  }
+}
 
 
 
+//-------------------
+// Elves abilities
+//-------------------
+"build_house"
+{
+  "BaseClass"                     "ability_datadriven"
+  "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityTextureName"            "elves/house"
+  "MaxLevel"                      "1"
+  "MaxBuildingCount"              "1"
+  "HotKeyOverride"                "A"
+  
+  "Building"                      "1"
+  "BuildingSize"                  "2"
+  "BuildTime"                     "2.0"
+  "AbilityCastRange"              "200"
+  "AbilityCastPoint"              "0.0"
+  "Scale"                         "1"
+  "PlayerCanControl"              "1"
+  "UpdateHealth"                  "1"
+
+  "UnitName"                      "elf_house1"
+  "OverrideBuildingGhost"         "elf_house1"
+  "AbilityGoldCost"               "0"
+    
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+        "ScriptFile"        "builder.lua"
+        "Function"          "Build"
+    }
+  }
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "0"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+}
+
+"build_rock"
+{
+  "BaseClass"                     "ability_datadriven"
+  "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityTextureName"            "elves/rock"
+  "MaxLevel"                      "1"
+  "MaxBuildingCount"              "6"
+  "HotKeyOverride"                "Z"
+  
+  "Building"                      "1"
+  "BuildingSize"                  "2"
+  "BuildTime"                     "2.0"
+  "AbilityCastRange"              "200"
+  "AbilityCastPoint"              "0.0"
+  "Scale"                         "1"
+  "PlayerCanControl"              "1"
+  "UpdateHealth"                  "1"
+
+  "UnitName"                      "elf_rock1"
+  "OverrideBuildingGhost"         "elf_rock1"
+  "AbilityGoldCost"               "4"
+    
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+        "ScriptFile"        "builder.lua"
+        "Function"          "Build"
+    }
+  }
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "4"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+}
+
+"unit_destroy"
+{
+  // General
+  //-----------------------------
+  "BaseClass"                     "ability_datadriven"
+  "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+  "MaxLevel"                      "1"
+  "AbilityTextureName"            "sell_tower"
+
+  "OnSpellStart"
+  {
+    "RemoveUnit"
+    {
+      "Target"  "CASTER"
+    }
+
+  }
+}
 
 
+//-------------------
+// Building Upgrades section -_-
+//-------------------
+"upgrade_rock1" //upgrade TO rock 2
+{
+  "BaseClass"                 "ability_datadriven"
+  "AbilityTextureName"      "elves/rock"
+  "MaxLevel"            "1"
 
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityGoldCost"       "8"
 
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "8"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
 
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "libraries/buildinghelper.lua"
+      "Function"    "AddToQueue"
+    }
 
+    //"RunScript"
+    //{
+    //  "ScriptFile"  "buildings/upgrades.lua"
+    //  "Function"    "StartUpgrade"
+    //  "ModifierName"  "modifier_building_particle"
+    //}
+  }
 
+  "OnChannelSucceeded"
+  {
+    // Consume the first item in the queue
+    //"RunScript"
+    //{
+    //  "ScriptFile"    "buildings/queue.lua"
+    //  "Function"      "NextQueue"
+    //}
+
+    "RunScript"
+    {
+      "ScriptFile"  "libraries/buildinghelper.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock2"
+    }   
+  }
+}
+
+"upgrade_rock2" //upgrade TO rock 3
+{
+  "BaseClass"                 "ability_datadriven"
+  "AbilityTextureName"      "elves/rock"
+  "MaxLevel"            "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityGoldCost"       "16"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "16"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/queue.lua"
+      "Function"    "EnqueueUnit"
+    }
+
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "StartUpgrade"
+      "ModifierName"  "modifier_building_particle"
+    }
+  }
+
+  "OnChannelSucceeded"
+  {
+    // Consume the first item in the queue
+    "RunScript"
+    {
+      "ScriptFile"    "buildings/queue.lua"
+      "Function"      "NextQueue"
+    }
+
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock3"
+    }   
+  }
+}
+
+"upgrade_rock3" //upgrade TO rock 4
+{
+  "BaseClass"                 "ability_datadriven"
+  "AbilityTextureName"      "elves/rock"
+  "MaxLevel"            "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityGoldCost"       "32"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "32"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/queue.lua"
+      "Function"    "EnqueueUnit"
+    }
+
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "StartUpgrade"
+      "ModifierName"  "modifier_building_particle"
+    }
+  }
+
+  "OnChannelSucceeded"
+  {
+    // Consume the first item in the queue
+    "RunScript"
+    {
+      "ScriptFile"    "buildings/queue.lua"
+      "Function"      "NextQueue"
+    }
+
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock4"
+    }   
+  }
+}
+
+"upgrade_rock4" //upgrade TO rock 5
+{
+  "BaseClass"                 "ability_datadriven"
+  "AbilityTextureName"      "elves/rock"
+  "MaxLevel"            "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityGoldCost"       "64"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "64"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/queue.lua"
+      "Function"    "EnqueueUnit"
+    }
+
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "StartUpgrade"
+      "ModifierName"  "modifier_building_particle"
+    }
+  }
+
+  "OnChannelSucceeded"
+  {
+    // Consume the first item in the queue
+    "RunScript"
+    {
+      "ScriptFile"    "buildings/queue.lua"
+      "Function"      "NextQueue"
+    }
+
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock5"
+    }   
+  }
+}
 
 
 

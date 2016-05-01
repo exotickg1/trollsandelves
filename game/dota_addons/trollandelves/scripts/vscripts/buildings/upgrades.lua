@@ -15,19 +15,19 @@ function UpgradeBuilding( event )
 	local angle = caster:GetAngles()
 
     -- New building
-	local building = BuildingHelper:PlaceBuilding(player, name, location, construction_size, pathing_size, angle)
+	local building = BuildingHelper:PlaceBuilding(player, new_unit, position, false, 0)
 	building.blockers = blockers
 	building:SetAngles(0, -angle.y, 0)
 
 	-- If the building to ugprade is selected, change the selection to the new one
-	if PlayerResource:IsUnitSelected(playerID, caster) then
-		PlayerResource:AddToSelection(playerID, building)
+	if IsCurrentlySelected(caster) then
+		AddUnitToSelection(building)
 	end
 
 	-- Remove the old building from the structures list
 	if IsValidEntity(caster) then
-		local buildingIndex = getIndex(hero.structures, caster)
-        table.remove(hero.structures, buildingIndex)
+		local buildingIndex = getIndex(player.structures, caster)
+        table.remove(player.structures, buildingIndex)
 		
 		-- Remove old building entity
 		caster:RemoveSelf()
@@ -38,21 +38,21 @@ function UpgradeBuilding( event )
 	building:SetHealth(newRelativeHP)
 
 	-- Add 1 to the buildings list for that name. The old name still remains
-	if not hero.buildings[new_unit] then
-		hero.buildings[new_unit] = 1
+	if not player.buildings[new_unit] then
+		player.buildings[new_unit] = 1
 	else
-		hero.buildings[new_unit] = hero.buildings[new_unit] + 1
+		player.buildings[new_unit] = player.buildings[new_unit] + 1
 	end
 
 	-- Add the new building to the structures list
-	table.insert(hero.structures, building)
+	table.insert(player.structures, building)
 
 	-- Update the abilities of the units and structures
-	for k,unit in pairs(hero.units) do
+	for k,unit in pairs(player.units) do
 		CheckAbilityRequirements( unit, player )
 	end
 
-	for k,structure in pairs(hero.structures) do
+	for k,structure in pairs(player.structures) do
 		CheckAbilityRequirements( structure, player )
 	end
 end

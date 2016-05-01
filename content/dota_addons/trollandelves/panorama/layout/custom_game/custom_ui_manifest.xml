@@ -45,7 +45,7 @@
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/modmaker/modmaker.xml" />
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/selection.xml" />
 
-    <!-- BUILDING HELPER-->
+    <!-- Building Helper -->
     <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/building_helper.xml" />
     <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/selection.xml" />
 

@@ -31,7 +31,7 @@ require('libraries/pathgraph')
 -- This library (by Noya) provides player selection inspection and management from server lua
 require('libraries/selection')
 
--- Custom Sounds
+-- Custom music background
 require('utils/musicsystem')
 
 -- These internal libraries set up barebones's events and processes.  Feel free to inspect them/change them if you need to.
@@ -107,6 +107,9 @@ function GameMode:OnHeroInGame(hero)
   -- These lines will create an item and add it to the player, effectively ensuring they start with the item
   local item = CreateItem("item_example_item", hero, hero)
   hero:AddItem(item)
+
+  -- Music BGM
+  InitBackGroundMusic()
 
   --[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
     --with the "example_ability" ability

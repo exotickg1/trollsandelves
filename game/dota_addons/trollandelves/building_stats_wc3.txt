@@ -1,0 +1,147 @@
+buildings stats:
+
+-----------------------------------
+------------- ROCKS ---------------
+-----------------------------------
+
+ - rock 1:
+	4 gold, 100 hp, 1 armor
+
+ - rock 2
+ 	8 gold, 140 hp, 1 armor
+
+ - rock 3
+ 	16 gold, 220 hp, 2 armor
+
+ - rock 4
+ 	32 gold, 340 hp, 2 armor
+
+ - rock 5
+ 	64 gold, 420 hp, 2 armor
+-----------------------------------
+ - ultra wall 1
+ 	128 gold, 640 hp, 4 armor
+ 	req: Hall
+
+ - ultra wall 2
+ 	256 gold, 1280 hp, 4 armor
+
+ - ultra wall 3
+ 	512 gold, 2560 hp, 4 armor
+
+ - ultra wall 4
+ 	1024 gold, 5120 hp, 6 armor
+
+ - ultra wall 5
+ 	2048 gold, 10240 hp, 6 armor
+-----------------------------------
+ - demonic wall 1
+ 	4096 gold, 32 lumber, 20480 hp, 8 armor
+ 	req: Castle
+
+ - demonic wall 2
+ 	8192 gold, 64 lumber, 40960 hp, 10 armor
+
+ - demonic wall 3
+ 	16384 gold, 128 lumber, 81920 hp, 12 armor
+
+ - demonic wall 4
+ 	32768 gold, 256 lumber, 163840 hp, 14 armor
+
+ - demonic wall 5
+ 	65536 gold, 512 lumber, 300 000 hp, 16 armor
+
+ - demonic wall 6 (?) // in original its demonic wall 8 again
+ 	100 000 gold, 1024 lumber, 360 000 hp, 25 armor
+-----------------------------------
+ - ionic wall
+ 	131 072 gold, 1024 lumber, 400 000 hp, 100 armor
+ 	req: Secret Laboratory
+ 		 Village House
+
+ - ultraionic wall
+ 	262144 gold, 2048 lumber, 500 000 hp, 120 armor
+
+ - end-game wall
+ 	999 999 gold, 999 999 lumber, 999 999 hp, 300 armor
+
+-----------------------------------
+------------- HOUSES --------------
+-----------------------------------
+
+ - tent
+ 	0 gold, 10 hp, 5 armor, +4 gps
+
+ - house
+ 	50 gold, 20 hp, 5 armor, +8 gps
+ 	req: rock
+
+ - house 2
+ 	100 gold, 40 hp, 5 armor, +16 gps
+ 	req: rock 4
+
+ - house 3
+ 	200 gold, 80 hp, 5 armor, +32 gps
+ 	req: hall
+
+ - house 4
+ 	400 gold, 160 hp, 5 armor, +64 gps
+ 	req: ultra wall 4
+
+ - house 5
+ 	800 gold, 32 lumber, 320 hp, 5 armor, +128 gps
+ 	req: castle
+
+ - house 6
+ 	1600 gold, 64 lumber, 640 hp, 5 armor, +256 gps
+ 	req: ultra wall 4
+
+ - house 7
+ 	3200 gold, 128 lumber, 1280 hp, 5 armor, +512 gps
+ 	req: demonic wall 1
+
+ - house 8
+ 	6400 gold, 256 lumber, 2560 hp, 5 armor, +1024 gps
+ 	req: demonic wall 2
+
+ - village house
+ 	12800 gold, 512 lumber, 5120 hp, 5 armor, +2048 gps
+ 	req: demonic wall 3
+
+
+-----------------------------------
+-------- TROLL REGEN ITEMS --------
+-----------------------------------
+
+ - badge of life
+ 	100 gold, 4 hps
+
+ - badge of the moon
+ 	200 gold, 8 hps
+
+ - badge of the night
+ 	400 gold, 16 hps
+
+ - twilight badge
+ 	800 gold, 32 hps
+
+ - sleep parchment
+ 	1600 gold, 64 hps
+
+ - scroll of sweet nights
+ 	3200 gold, 128 hps
+
+ - sleepless nights parchment
+ 	6400 gold, 256 hps
+
+ - nightmares parchment
+ 	12800 gold, 512 hps
+
+ - calamitous potion
+ 	1 lumber, 2560 hps
+
+ - calamitous potion ultra
+ 	2 lumber, 5120 hps
+
+ - calamitous potion ultimate
+ 	8 lumber, 20480 hps

@@ -60,10 +60,17 @@
   // Level 1 - Green Recipes
   "basics"
   {
-    "item"    "item_wraith_band"
-    "item"    "item_null_talisman"
-    "item"    "item_magic_wand"
-    "item"    "item_bracer"    
+    "item"    "item_trollsandelves_regen1"
+    "item"    "item_trollsandelves_regen2"
+    "item"    "item_trollsandelves_regen3"
+    "item"    "item_trollsandelves_regen4"
+    "item"    "item_trollsandelves_regen5"
+    "item"    "item_trollsandelves_regen6"
+    "item"    "item_trollsandelves_regen7"
+    "item"    "item_trollsandelves_regen8"
+    "item"    "item_trollsandelves_regen9"
+    "item"    "item_trollsandelves_regen10"
+    "item"    "item_trollsandelves_regen11" 
   }
 
   // Level 2 - Blue Recipes

@@ -6,5 +6,7 @@
         "selection",
         "construction_size",
         "building_settings",
+        "food",
+		"lumber",
     ]
 } 

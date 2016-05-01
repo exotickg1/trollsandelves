@@ -1,7 +1,7 @@
 "DOTAHeroes"
 {
-  "npc_dota_hero_ancient_apparition_barebones"
-  {
+    "npc_dota_hero_ancient_apparition_barebones"
+    {
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_ancient_apparition"
     "SoundSet"          "0" 
@@ -55,14 +55,14 @@
 
     "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
     "VisionNighttimeRange"    "1800"                  // Range of vision at night time.
-  }
+    }
 
     "npc_dota_hero_elf_trollsandelves"
     {
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_meepo"
     "SoundSet"          "0" 
-    "Ability1"        "build_tent" 
+    "Ability1"        "build_house" 
     "Ability2"        "build_rock" 
     "Ability3"        "barebones_empty3" 
     "Ability4"        "barebones_empty4"

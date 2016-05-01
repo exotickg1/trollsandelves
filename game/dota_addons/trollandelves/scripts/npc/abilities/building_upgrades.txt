@@ -1,0 +1,41 @@
+"upgrade_house1" //upgrade TO house 2
+{
+	"BaseClass"             		"ability_datadriven"
+	"AbilityTextureName"			"elves/house"
+	"MaxLevel" 						"1"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	"AbilityGoldCost"				"100"
+
+	"OnSpellStart"
+	{
+		"RunScript"
+		{
+			"ScriptFile"	"buildings/upgrades.lua"
+			"Function"		"UpgradeBuilding"
+			"UnitName"		"elf_house2"
+		}
+	}
+}
+
+"upgrade_house2" //upgrade TO house 3
+{
+	"BaseClass"             		"ability_datadriven"
+	"AbilityTextureName"			"elves/house"
+	"MaxLevel" 						"1"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+
+	"AbilityGoldCost"				"100"
+
+	"OnSpellStart"
+	{
+		"RunScript"
+		{
+			"ScriptFile"	"buildings/upgrades.lua"
+			"Function"		"UpgradeBuilding"
+			"UnitName"		"elf_house3"
+		}
+	}
+}

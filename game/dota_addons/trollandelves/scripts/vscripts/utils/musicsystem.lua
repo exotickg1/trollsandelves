@@ -1,27 +1,33 @@
 music_table={
-	{"backgroundmusic_1","TrollsAndElves.background1",227.0,true},
-	{"backgroundmusic_2","TrollsAndElves.background2",179.0,true},
-	{"backgroundmusic_3","TrollsAndElves.background3",210.0,true},
-	{"backgroundmusic_4","TrollsAndElves.background4",193.0,true},
-	{"backgroundmusic_5","TrollsAndElves.background5",247.0,true},
-	{"backgroundmusic_6","TrollsAndElves.background6",335.0,true}
+	{"ent_gw_csd1","bgm.background1",227.0,true},
+	{"ent_gw_csd2","bgm.background2",179.0,true},
+	{"ent_gw_csd3","bgm.background3",210.0,true},
+	{"ent_gw_csd4","bgm.background4",193.0,true},
+	{"ent_gw_csd5","bgm.background5",247.0,true},
+	{"ent_gw_csd6","bgm.background6",335.0,true}
 }
+GameRules.bgm_index = RandomInt(1, 6)
 
 function InitBackGroundMusic()
-	for k,v in ipairs(music_table) do
-		local ent = Entities:FindByName(nil, v[1])
-		if ent ~= nil then
-			ent:SetContextThink(v[1],
-				function ()
-					EmitSoundOn(v[2],ent)
-					if v[4] then
-						return v[3]
+	local v = music_table[GameRules.bgm_index]
+	local ent = Entities:FindByName(nil, v[1])
+	if ent ~= nil then
+		ent:SetContextThink(v[1],
+			function ()
+				v = music_table[GameRules.bgm_index]
+				EmitSoundOn(v[2],ent)
+				if v[4] then
+					if GameRules.bgm_index == #music_table then
+						GameRules.bgm_index = 1
 					else
-						return nil
+						GameRules.bgm_index = (GameRules.bgm_index + 1)
 					end
-				end, 
-			0.1)
-		end
+					return v[3]
+				else
+					return nil
+				end
+			end, 
+		0.1)
 	end
 end
 

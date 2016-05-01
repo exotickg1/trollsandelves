@@ -3,6 +3,7 @@
 require('internal/util')
 require('gamemode')
 require('libraries/buildinghelper')
+require('utils/musicsystem')
 
 function Precache( context )
 --[[
@@ -75,6 +76,19 @@ function Precache( context )
   PrecacheItemByNameSync("item_trollsandelves_gloves4", context)
   PrecacheItemByNameSync("item_trollsandelves_gloves5", context)
   PrecacheItemByNameSync("item_trollsandelves_gloves6", context)
+
+  -- Health
+  PrecacheItemByNameSync("item_trollsandelves_hp1", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp2", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp3", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp4", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp5", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp6", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp7", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp8", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp9", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp10", context)
+  PrecacheItemByNameSync("item_trollsandelves_hp11", context)
 
 
   -- Entire heroes (sound effects/voice/models/particles) can be precached with PrecacheUnitByNameSync

@@ -16,7 +16,7 @@ function EnqueueUnit( event )
 
 	if not PlayerHasEnoughLumber( player, lumber_cost ) then
  		PlayerResource:ModifyGold(pID, gold_cost, false, 0) -- refund gold
-		--SendErrorMessage(pID, "#error_not_enough_lumber")
+		SendErrorMessage(pID, "#error_not_enough_lumber")
 		return
 	end
 
