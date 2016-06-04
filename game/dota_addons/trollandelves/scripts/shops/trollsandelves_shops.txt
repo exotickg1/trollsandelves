@@ -1,0 +1,185 @@
+"dota_shops"
+{
+  "consumables"
+  {
+    "item"    "item_trollsandelves_hp1"
+    "item"    "item_trollsandelves_hp2"
+    "item"    "item_trollsandelves_hp3"
+    "item"    "item_trollsandelves_hp4"
+    "item"    "item_trollsandelves_hp5"
+    "item"    "item_trollsandelves_hp6"
+    "item"    "item_trollsandelves_hp7"
+    "item"    "item_trollsandelves_hp8"
+    "item"    "item_trollsandelves_hp9"
+    "item"    "item_trollsandelves_hp10"
+    "item"    "item_trollsandelves_hp11"
+  }
+
+  "attributes"
+  {
+    "item"    "item_trollsandelves_dmg1"
+    "item"    "item_trollsandelves_dmg2"
+    "item"    "item_trollsandelves_dmg3"
+    "item"    "item_trollsandelves_dmg4"
+    "item"    "item_trollsandelves_dmg5"
+    "item"    "item_trollsandelves_dmg6"
+    "item"    "item_trollsandelves_dmg7"
+    "item"    "item_trollsandelves_dmg8"
+    "item"    "item_trollsandelves_dmg9"
+    "item"    "item_trollsandelves_dmg10"
+    "item"    "item_trollsandelves_dmg11"
+    "item"    "item_trollsandelves_dmg12"
+  }
+
+  "weapons_armor"
+  {
+    "item"    "item_trollsandelves_armor1"
+    "item"    "item_trollsandelves_armor2"
+    "item"    "item_trollsandelves_armor3"
+    "item"    "item_trollsandelves_armor4"
+    "item"    "item_trollsandelves_armor5"
+    "item"    "item_trollsandelves_armor6"
+    "item"    "item_trollsandelves_armor7"
+    "item"    "item_trollsandelves_armor8"
+    "item"    "item_trollsandelves_armor9"
+    "item"    "item_trollsandelves_armor10"
+    "item"    "item_trollsandelves_armor11"
+    "item"    "item_trollsandelves_armor12"
+  }
+      
+  "misc"
+  {
+    "item"    "item_trollsandelves_gloves1"
+    "item"    "item_trollsandelves_gloves2"
+    "item"    "item_trollsandelves_gloves3"
+    "item"    "item_trollsandelves_gloves4"
+    "item"    "item_trollsandelves_gloves5"
+    "item"    "item_trollsandelves_gloves6"
+  } 
+  
+  // Level 1 - Green Recipes
+  "basics"
+  {
+    "item"    "item_trollsandelves_regen1"
+    "item"    "item_trollsandelves_regen2"
+    "item"    "item_trollsandelves_regen3"
+    "item"    "item_trollsandelves_regen4"
+    "item"    "item_trollsandelves_regen5"
+    "item"    "item_trollsandelves_regen6"
+    "item"    "item_trollsandelves_regen7"
+    "item"    "item_trollsandelves_regen8"
+    "item"    "item_trollsandelves_regen9"
+    "item"    "item_trollsandelves_regen10"
+    "item"    "item_trollsandelves_regen11" 
+  }
+
+  // Level 2 - Blue Recipes
+  "support"
+  {
+    "item"    "item_ring_of_basilius"
+    "item"    "item_headdress"
+    "item"    "item_buckler"
+    "item"    "item_urn_of_shadows"
+    //"item"    "item_natures_mend"
+    "item"    "item_ring_of_aquila" 
+    //"item"    "item_iron_talon" 
+    "item"    "item_tranquil_boots"  
+  }
+        
+  "magics"      
+  {
+    "item"    "item_force_staff"
+    "item"    "item_necronomicon"
+    "item"    "item_cyclone"
+    "item"    "item_dagon"
+    "item"    "item_veil_of_discord"    
+  }
+    
+  // Level 3 - Purple Recipes 
+  "defense"
+  {
+    "item"    "item_hood_of_defiance"
+    "item"    "item_blade_mail"
+    "item"    "item_vanguard"
+    "item"    "item_soul_booster"
+    "item"    "item_black_king_bar"
+    "item"    "item_shivas_guard"
+  }
+      
+  "weapons"
+  {
+    "item"    "item_lesser_crit"  
+    "item"    "item_armlet"
+    "item"    "item_basher" 
+    "item"    "item_invis_sword"
+    "item"    "item_bfury"
+  }
+    
+  // Level 4 - Orange / Orb / Artifacts       
+  "artifacts"
+  { 
+    //"item"    "item_venomous_shield"
+    "item"    "item_helm_of_the_dominator"
+    "item"    "item_mask_of_madness"
+    "item"    "item_sange"
+    "item"    "item_yasha"
+    "item"    "item_maelstrom"
+    "item"    "item_diffusal_blade"     
+    "item"    "item_desolator"
+    "item"    "item_heavens_halberd"
+    "item"    "item_sange_and_yasha"
+    "item"    "item_mjollnir"
+    "item"    "item_skadi" 
+    "item"    "item_satanic"    
+  }
+
+  "sideshop1"
+  {
+    "item"    "item_tpscroll"
+    "item"    "item_magic_stick"
+    "item"    "item_sobi_mask"
+    "item"    "item_ring_of_regen"
+    "item"    "item_orb_of_venom"
+    "item"    "item_boots"
+    "item"    "item_cloak"
+    "item"    "item_ring_of_health"
+    "item"    "item_void_stone"     
+    "item"    "item_lifesteal"
+    "item"    "item_helm_of_iron_will"
+    "item"    "item_energy_booster"
+    "item"    "item_broadsword"
+  }
+
+  "sideshop2"
+  {
+    "item"    "item_slippers"
+    "item"    "item_mantle"
+    "item"    "item_quelling_blade"
+    "item"    "item_stout_shield"
+    "item"    "item_boots_of_elves"
+    "item"    "item_belt_of_strength"
+    "item"    "item_robe"
+    "item"    "item_blades_of_attack"
+    "item"    "item_gloves"
+    "item"    "item_chainmail"
+    "item"    "item_quarterstaff"
+    "item"    "item_ultimate_orb"
+    "item"    "item_blink"
+  }
+  
+  "secretshop"
+  {             
+    "item"    "item_energy_booster"
+    "item"    "item_vitality_booster"
+    "item"    "item_point_booster"
+    "item"    "item_platemail"
+    "item"    "item_talisman_of_evasion"
+    "item"    "item_hyperstone"
+    "item"    "item_ultimate_orb"
+    "item"    "item_demon_edge"
+    "item"    "item_mystic_staff"
+    "item"    "item_reaver"
+    "item"    "item_eagle"
+    "item"    "item_relic"
+  } 
+}

@@ -1,0 +1,2676 @@
+"DOTAAbilities"
+{
+  "item_containers_lua_pack"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "ID"              "1835"
+    "BaseClass"         "item_lua"
+    "AbilityTextureName"        "item_present"
+    "ScriptFile"          "libraries/abilities/item_containers_lua_pack.lua"
+    "MaxLevel"            "1"
+
+    "ItemCost"            "0"
+    "ItemPurchasable"          "0"
+    "ItemKillable"             "0"
+    "ItemDroppable"            "0"
+    "ItemSellable"             "0"
+    "ItemCanChangeContainer"   "0"
+    
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "0"
+
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "0"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0 0 0 0"
+  }
+
+  //Shield
+  "item_example_item"
+  {
+    "ID"              "1836"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+    "BaseClass"           "item_datadriven"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    "AbilityTextureName"      "item_example_item"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "900"
+    "AbilityCastPoint"        "0.2"
+    "AbilityCooldown"       "13.0"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "100"
+    "ItemCost"            "750"
+    "ItemInitialCharges"      "0"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemRequiresCharges"     "0"
+    "ItemShareability"        "ITEM_NOT_SHAREABLE"
+    "ItemDeclarations"        "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+    
+    "MaxUpgradeLevel"       "1"
+    "ItemBaseLevel"         "1"
+    
+    "precache"
+    {
+      "particle"              "particles/frostivus_herofx/queen_shadow_strike_linear_parent.vpcf"
+      "particle_folder"       "particles/test_particle"
+      "soundfile"             "soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
+    }
+    "OnSpellStart"
+    {
+      "LinearProjectile"
+      {
+        "EffectName"      "particles/frostivus_herofx/queen_shadow_strike_linear_parent.vpcf"
+        "MoveSpeed"       "%speed"
+        //"StartPosition"   "attach_attack1"
+        "FixedDistance"   "%distance"
+        "StartRadius"     "%radius"
+        "EndRadius"       "%radius"
+        "TargetTeams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "TargetTypes"     "DOTA_UNIT_TARGET_HERO"
+        "TargetFlags"     "DOTA_UNIT_TARGET_FLAG_NONE"
+        "HasFrontalCone"    "0"
+        "ProvidesVision"    "0"
+        "VisionRadius"      "0"
+      }
+      "FireSound"
+      {
+        "EffectName"    "Hero_Abaddon.AphoticShield.Cast"
+        "Target"        "CASTER"
+      }
+      "ApplyModifier"
+      {
+        "Target"      "CASTER"
+        "ModifierName"  "modifier_item_shield"
+      }
+    }
+    
+    "OnProjectileHitUnit"
+    {     
+      "DeleteOnHit" "0"
+      "Damage"
+      {
+        "Target"      "TARGET"
+        "Type"    "DAMAGE_TYPE_PURE"
+        "Damage"  "%damage"
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_item_shield"
+      {
+        "EffectName"    "particles/test_particle/damage_immunity.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"      "CASTER"
+        
+        "Duration" "%duration"
+        "TextureName" "abaddon_aphotic_shield"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"    "%damage_reduction"
+        }
+      }
+
+      "modifier_item_ex"
+      {
+        "Passive" "1"
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"    "33"
+        }
+      }
+
+      "modifier_item_ex2"
+      {
+        "Passive" "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"    "3"
+        }
+      }
+    }
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "duration"        "4.0"
+      }
+      
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage_reduction"    "-50"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "radius"          "150"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "speed"           "1800"
+      }
+      "05"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "distance"        "900"
+      }
+      "06"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage"          "125"
+      }
+    }
+  }
+
+  //--------------------------------
+  //Trolls And Elves Original Items
+  //--------------------------------
+  
+  //--------------------------------
+  //Armors:
+  //--------------------------------
+  "item_trollsandelves_armor1"
+  {
+    "ID"                    "2000"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "100"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "wooden_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "1"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor1"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor2"
+  {
+    "ID"                    "2001"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor2"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "iron_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "2"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor2"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor3"
+  {
+    "ID"                    "2002"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor3"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "steel_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "4"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor3"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor4"
+  {
+    "ID"                    "2003"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor4"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "diamond_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "8"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor4"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor5"
+  {
+    "ID"                    "2004"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "1600"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "platinum_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "16"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor5"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor6"
+  {
+    "ID"                    "2005"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor6"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "3200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "silver_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "32"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor6"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor7"
+  {
+    "ID"                    "2006"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor7"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "6400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "golden_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "64"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor7"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor8"
+  {
+    "ID"                    "2007"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor8"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "12800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "ionic_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "128"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor8"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor9"
+  {
+    "ID"                    "2008"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor9"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "ultra_ionic_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "1024"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor9"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor10"
+  {
+    "ID"                    "2009"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor10"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "ultra_ionic_ultra_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "2048"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor10"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+
+  "item_trollsandelves_armor11"
+  {
+    "ID"                    "2010"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor11"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "ultra_ionic_mega_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "4096"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor11"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_armor12"
+  {
+    "ID"                    "2011"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_armor12"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "armor;shield"
+    "ItemAliases"           "ultra_ionic_endgame_shield"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_armor" "8192"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_armor12"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+            }
+        } 
+    }
+  }
+
+  //--------------------------------
+  //Gloves:
+  //--------------------------------
+  "item_trollsandelves_gloves1"
+  {
+    "ID"                    "2012"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_gloves1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "100"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "speed;gloves"
+    "ItemAliases"           "gloves_of_speed"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_attack_speed" "20"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_gloves1"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_gloves2"
+  {
+    "ID"                    "2013"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_gloves2"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "speed;gloves"
+    "ItemAliases"           "gloves_of_higher_speed"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_attack_speed" "40"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_gloves2"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_gloves3"
+  {
+    "ID"                    "2014"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_gloves3"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "speed;gloves"
+    "ItemAliases"           "sonic_gloves"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_attack_speed" "80"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_gloves3"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_gloves4"
+  {
+    "ID"                    "2015"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_gloves4"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "speed;gloves"
+    "ItemAliases"           "gloves_of_haste"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_attack_speed" "100"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_gloves4"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_gloves5"
+  {
+    "ID"                    "2016"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_gloves5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "1600"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "speed;gloves"
+    "ItemAliases"           "electronic_gloves"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_attack_speed" "200"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_gloves5"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_gloves6"
+  {
+    "ID"                    "2017"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_gloves6"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "3200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "speed;gloves"
+    "ItemAliases"           "ionic_gloves"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_attack_speed" "400"
+        }
+      }
+
+
+    "Modifiers"
+    {
+        "modifier_gloves6"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+            }
+        } 
+    }
+  }
+
+  //--------------------------------
+  //Blades:
+  //--------------------------------
+  "item_trollsandelves_dmg1"
+  {
+    "ID"                    "2018"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "100"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "iron_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "2"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg1"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg2"
+  {
+    "ID"                    "2019"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg2"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "steel_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "4"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg2"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg3"
+  {
+    "ID"                    "2020"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg3"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "bronze_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "8"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg3"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg4"
+  {
+    "ID"                    "2021"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg4"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "diamond_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "16"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg4"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg5"
+  {
+    "ID"                    "2022"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "1600"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "platinum_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "32"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg5"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg6"
+  {
+    "ID"                    "2023"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg6"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "3200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "silver_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "64"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg6"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg7"
+  {
+    "ID"                    "2024"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg7"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "6400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "gold_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "128"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg7"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg8"
+  {
+    "ID"                    "2025"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg8"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "12800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "ionizer_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "256"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg8"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg9"
+  {
+    "ID"                    "2026"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg9"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "1"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "ultraionic_blade"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "1280"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg9"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg10"
+  {
+    "ID"                    "2027"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg10"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "2"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "ultraionic_blade_ultra"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "2560"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg10"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg11"
+  {
+    "ID"                    "2028"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg11"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "8"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "ultraionic_blade_ultimate"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "10240"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg11"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_dmg12"
+  {
+    "ID"                    "2029"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_dmg12"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "32"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "damage;blade"
+    "ItemAliases"           "endgame_nortaunit"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_damage" "32890"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_dmg12"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+            }
+        } 
+    }
+  }
+
+
+  //--------------------------------
+  // Health items:
+  //--------------------------------
+  "item_trollsandelves_hp1"
+  {
+    "ID"                    "2030"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "100"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "amulet_of_life"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "250"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp1"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp2"
+  {
+    "ID"                    "2031"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp2"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "amulet_of_the_sun"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "500"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp2"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp3"
+  {
+    "ID"                    "2032"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp3"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "amulet_of_the_day"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "1000"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp3"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp4"
+  {
+    "ID"                    "2033"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp4"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "amulet_of_the_dawn"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "2000"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp4"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp5"
+  {
+    "ID"                    "2034"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "1600"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "blood_parchment"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "4000"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp5"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp6"
+  {
+    "ID"                    "2035"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp6"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "3200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "scroll_of_life"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "8000"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp6"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp7"
+  {
+    "ID"                    "2036"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp7"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "6400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "scroll_of_major_blood"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "16000"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp7"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp8"
+  {
+    "ID"                    "2037"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp8"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "12800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "scroll_of_eternal_life"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "32000"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp8"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp9"
+  {
+    "ID"                    "2038"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp9"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "1"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "potion_of_eternity"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "160000"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp9"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp10"
+  {
+    "ID"                    "2039"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp10"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "2"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "potion_of_eternity_ultra"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "320000"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp10"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_hp11"
+  {
+    "ID"                    "2040"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_hp11"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "8"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "hp;health"
+    "ItemAliases"           "potion_of_eternity_ultimate"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_hp" "640000" //399.996 in original
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_hp11"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_hp"
+            }
+        } 
+    }
+  }
+
+  //--------------------------------
+  // Health regen items:
+  //--------------------------------
+  "item_trollsandelves_regen1"
+  {
+    "ID"                    "2041"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "100"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "badge_of_life"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type"    "FIELD_INTEGER"
+          "bonus_regen" "4"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen1"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen2"
+  {
+    "ID"                    "2042"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen2"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "badge_of_the_moon"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "8"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen2"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen3"
+  {
+    "ID"                    "2043"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen3"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "badge_of_the_night"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "16"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen3"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen4"
+  {
+    "ID"                    "2044"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen4"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "twilight_badge"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "32"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen4"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen5"
+  {
+    "ID"                    "2045"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "1600"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "sleep_parchment"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "64"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen5"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen6"
+  {
+    "ID"                    "2046"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen6"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "3200"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "scroll_of_sweet_nights"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "128"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen6"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen7"
+  {
+    "ID"                    "2047"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen7"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "6400"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "sleepless_nights_parchment"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "256"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen7"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen8"
+  {
+    "ID"                    "2048"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen8"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "12800"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "nightmares_parchment"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "512"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen8"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen9"
+  {
+    "ID"                    "2049"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen9"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "1"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "calamitous_potion"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "2560"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen9"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen10"
+  {
+    "ID"                    "2050"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen10"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "2"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "calamitous_potion_ultra"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "5120"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen10"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+  "item_trollsandelves_regen11"
+  {
+    "ID"                    "2051"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "item_datadriven"
+    "AbilityTextureName"    "item_trollsandelves_regen11"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "0"
+    "LumberCost"            "8"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemShareability"      "ITEM_FULLY_SHAREABLE_STACKING"
+    "ItemShopTags"          "regen;health"
+    "ItemAliases"           "calamitous_potion_ultimate"
+    "ItemQuality"           "consumable"
+
+    "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type" "FIELD_INTEGER"
+          "bonus_regen" "20480"
+        }
+      }
+
+    "Modifiers"
+    {
+        "modifier_regen11"
+        {
+            "Passive"  "1"
+            "IsHidden" "1" 
+            "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
+            }
+        } 
+    }
+  }
+
+
+  //--------------------------------
+  //Items for Building Queue
+  //--------------------------------
+  "item_building_cancel"
+  {
+    "BaseClass"                 "item_datadriven"
+    "AbilityTextureName"      "item_cancel"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+    "AbilityCastPoint"        "0"
+
+    "ItemDroppable"         "0"
+    "ItemPurchasable"         "0"
+    "ItemSellable"          "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "builder.lua"
+        "Function"    "CancelBuilding"
+      }
+    }
+  }
+
+  "item_upgrade_rock1"
+  {
+    "BaseClass"                 "item_datadriven"
+    "AbilityTextureName"      "item_upgrade_rock1"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+    "AbilityCastPoint"        "0"
+  
+    "ItemDroppable"         "0"
+    "ItemPurchasable"         "0"
+    "ItemSellable"          "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "buildings/queue.lua"
+        "Function"    "DequeueUnit"
+      }
+  
+      // Re-enable abilities
+      "RunScript"
+      {
+        "ScriptFile"  "buildings/upgrades.lua"
+        "Function"    "CancelUpgrade"
+      }
+  
+      "RemoveModifier"
+      {
+        "ModifierName"  "modifier_building_particle"
+        "Target"    "CASTER"
+      }
+    }
+  }
+
+  //--------------------------------
+  //Delete Original Dota Items
+  //--------------------------------
+    "item_blink"                            "REMOVE"
+    "item_blades_of_attack"                 "REMOVE"
+    "item_broadsword"                       "REMOVE"
+    "item_chainmail"                        "REMOVE"
+    "item_claymore"                         "REMOVE"
+    "item_helm_of_iron_will"                "REMOVE"
+    "item_javelin"                          "REMOVE"
+    "item_mithril_hammer"                   "REMOVE"
+    "item_platemail"                        "REMOVE"
+    "item_quarterstaff"                     "REMOVE"
+    "item_quelling_blade"                   "REMOVE"
+    "item_ring_of_protection"               "REMOVE"
+    "item_stout_shield"                     "REMOVE"
+    "item_gauntlets"                        "REMOVE"
+    "item_slippers"                         "REMOVE"
+    "item_mantle"                           "REMOVE"
+    "item_branches"                         "REMOVE"
+    "item_belt_of_strength"                 "REMOVE"
+    "item_boots_of_elves"                   "REMOVE"
+    "item_robe"                             "REMOVE"
+    "item_circlet"                          "REMOVE"
+    "item_ogre_axe"                         "REMOVE"
+    "item_blade_of_alacrity"                "REMOVE"
+    "item_staff_of_wizardry"                "REMOVE"
+    "item_ultimate_orb"                     "REMOVE"
+    "item_gloves"                           "REMOVE"
+    "item_lifesteal"                        "REMOVE"
+    "item_ring_of_regen"                    "REMOVE"
+    "item_sobi_mask"                        "REMOVE"
+    "item_boots"                            "REMOVE"
+    "item_gem"                              "REMOVE"
+    "item_cloak"                            "REMOVE"
+    "item_talisman_of_evasion"              "REMOVE"
+    "item_cheese"                           "REMOVE"
+    "item_magic_stick"                      "REMOVE"
+    "item_recipe_magic_wand"                "REMOVE"
+    "item_magic_wand"                       "REMOVE"
+    "item_ghost"                            "REMOVE"
+    "item_clarity"                          "REMOVE"
+    "item_flask"                            "REMOVE"
+    "item_dust"                             "REMOVE"
+    "item_bottle"                           "REMOVE"
+    "item_ward_observer"                    "REMOVE"
+    "item_ward_sentry"                      "REMOVE"
+    "item_tango"                            "REMOVE"
+    "item_tango_single"                     "REMOVE"
+    "item_courier"                          "REMOVE"
+    "item_tpscroll"                         "REMOVE"
+    "item_recipe_travel_boots"              "REMOVE"
+    "item_travel_boots"                     "REMOVE"
+    "item_recipe_phase_boots"               "REMOVE"
+    "item_phase_boots"                      "REMOVE"
+    "item_demon_edge"                       "REMOVE"
+    "item_eagle"                            "REMOVE"
+    "item_reaver"                           "REMOVE"
+    "item_relic"                            "REMOVE"
+    "item_hyperstone"                       "REMOVE"
+    "item_ring_of_health"                   "REMOVE"
+    "item_void_stone"                       "REMOVE"
+    "item_mystic_staff"                     "REMOVE"
+    "item_energy_booster"                   "REMOVE"
+    "item_point_booster"                    "REMOVE"
+    "item_vitality_booster"                 "REMOVE"
+    "item_recipe_power_treads"              "REMOVE"
+    "item_power_treads"                     "REMOVE"
+    "item_recipe_hand_of_midas"             "REMOVE"
+    "item_hand_of_midas"                    "REMOVE"
+    "item_recipe_oblivion_staff"            "REMOVE"
+    "item_oblivion_staff"                   "REMOVE"
+    "item_recipe_pers"                      "REMOVE"
+    "item_pers"                             "REMOVE"
+    "item_recipe_poor_mans_shield"          "REMOVE"
+    "item_poor_mans_shield"                 "REMOVE"
+    "item_recipe_bracer"                    "REMOVE"
+    "item_bracer"                           "REMOVE"
+    "item_recipe_wraith_band"               "REMOVE"
+    "item_wraith_band"                      "REMOVE"
+    "item_recipe_null_talisman"             "REMOVE"
+    "item_null_talisman"                    "REMOVE"
+    "item_recipe_mekansm"                   "REMOVE"
+    "item_mekansm"                          "REMOVE"
+    "item_recipe_vladmir"                   "REMOVE"
+    "item_vladmir"                          "REMOVE"
+    "item_flying_courier"                   "REMOVE"
+    "item_recipe_buckler"                   "REMOVE"
+    "item_buckler"                          "REMOVE"
+    "item_recipe_ring_of_basilius"          "REMOVE"
+    "item_ring_of_basilius"                 "REMOVE"
+    "item_recipe_pipe"                      "REMOVE"
+    "item_pipe"                             "REMOVE"
+    "item_recipe_urn_of_shadows"            "REMOVE"
+    "item_urn_of_shadows"                   "REMOVE"
+    "item_recipe_headdress"                 "REMOVE"
+    "item_headdress"                        "REMOVE"
+    "item_recipe_sheepstick"                "REMOVE"
+    "item_sheepstick"                       "REMOVE"
+    "item_recipe_orchid"                    "REMOVE"
+    "item_orchid"                           "REMOVE"
+    "item_recipe_cyclone"                   "REMOVE"
+    "item_cyclone"                          "REMOVE"
+    "item_recipe_force_staff"               "REMOVE"
+    "item_force_staff"                      "REMOVE"
+    "item_recipe_dagon"                     "REMOVE"
+    "item_recipe_dagon_2"                   "REMOVE"
+    "item_recipe_dagon_3"                   "REMOVE"
+    "item_recipe_dagon_4"                   "REMOVE"
+    "item_recipe_dagon_5"                   "REMOVE"
+    "item_dagon"                            "REMOVE"
+    "item_dagon_2"                          "REMOVE"
+    "item_dagon_3"                          "REMOVE"
+    "item_dagon_4"                          "REMOVE"
+    "item_dagon_5"                          "REMOVE"
+    "item_recipe_necronomicon"              "REMOVE"
+    "item_recipe_necronomicon_2"            "REMOVE"
+    "item_recipe_necronomicon_3"            "REMOVE"
+    "item_necronomicon"                     "REMOVE"
+    "item_necronomicon_2"                   "REMOVE"
+    "item_necronomicon_3"                   "REMOVE"
+    "item_recipe_ultimate_scepter"          "REMOVE"
+    "item_ultimate_scepter"                 "REMOVE"
+    "item_recipe_refresher"                 "REMOVE"
+    "item_refresher"                        "REMOVE"
+    "item_recipe_assault"                   "REMOVE"
+    "item_assault"                          "REMOVE"
+    "item_recipe_heart"                     "REMOVE"
+    "item_heart"                            "REMOVE"
+    "item_recipe_black_king_bar"            "REMOVE"
+    "item_black_king_bar"                   "REMOVE"
+    "item_aegis"                            "REMOVE"
+    "item_recipe_shivas_guard"              "REMOVE"
+    "item_shivas_guard"                     "REMOVE"
+    "item_recipe_bloodstone"                "REMOVE"
+    "item_bloodstone"                       "REMOVE"
+    "item_recipe_sphere"                    "REMOVE"
+    "item_sphere"                           "REMOVE"
+    "item_recipe_reflex_energy_regen_booster"   "REMOVE"
+    "item_vanguard"                         "REMOVE"
+    "item_recipe_blade_mail"                "REMOVE"
+    "item_blade_mail"                       "REMOVE"
+    "item_recipe_soul_booster"              "REMOVE"
+    "item_soul_booster"                     "REMOVE"
+    "item_recipe_hood_of_defiance"          "REMOVE"
+    "item_hood_of_defiance"                 "REMOVE"
+    "item_recipe_rapier"                    "REMOVE"
+    "item_rapier"                           "REMOVE"
+    "item_recipe_monkey_king_bar"           "REMOVE"
+    "item_monkey_king_bar"                  "REMOVE"
+    "item_recipe_radiance"                  "REMOVE"
+    "item_radiance"                         "REMOVE"
+    "item_recipe_butterfly"                 "REMOVE"
+    "item_butterfly"                        "REMOVE"
+    "item_recipe_greater_crit"              "REMOVE"
+    "item_greater_crit"                     "REMOVE"
+    "item_recipe_basher"                    "REMOVE"
+    "item_basher"                           "REMOVE"
+    "item_recipe_bfury"                     "REMOVE"
+    "item_bfury"                            "REMOVE"
+    "item_recipe_manta"                     "REMOVE"
+    "item_manta"                            "REMOVE"
+    "item_recipe_lesser_crit"               "REMOVE"
+    "item_lesser_crit"                      "REMOVE"
+    "item_recipe_armlet"                    "REMOVE"
+    "item_armlet"                           "REMOVE"
+    "item_recipe_invis_sword"               "REMOVE"
+    "item_invis_sword"                      "REMOVE"
+    "item_recipe_sange_and_yasha"           "REMOVE"
+    "item_sange_and_yasha"                  "REMOVE"
+    "item_recipe_satanic"                   "REMOVE"
+    "item_satanic"                          "REMOVE"
+    "item_recipe_mjollnir"                  "REMOVE"
+    "item_mjollnir"                         "REMOVE"
+    "item_recipe_skadi"                     "REMOVE"
+    "item_skadi"                            "REMOVE"
+    "item_recipe_sange"                     "REMOVE"
+    "item_sange"                            "REMOVE"
+    "item_recipe_helm_of_the_dominator"     "REMOVE"
+    "item_helm_of_the_dominator"            "REMOVE"
+    "item_recipe_maelstrom"                 "REMOVE"
+    "item_maelstrom"                        "REMOVE"
+    "item_recipe_desolator"                 "REMOVE"
+    "item_desolator"                        "REMOVE"
+    "item_recipe_yasha"                     "REMOVE"
+    "item_yasha"                            "REMOVE"
+    "item_recipe_mask_of_madness"           "REMOVE"
+    "item_mask_of_madness"                  "REMOVE"
+    "item_recipe_diffusal_blade"            "REMOVE"
+    "item_recipe_diffusal_blade_2"          "REMOVE"
+    "item_diffusal_blade"                   "REMOVE"
+    "item_diffusal_blade_2"                 "REMOVE"
+    "item_recipe_ethereal_blade"            "REMOVE"
+    "item_ethereal_blade"                   "REMOVE"
+    "item_recipe_soul_ring"                 "REMOVE"
+    "item_soul_ring"                        "REMOVE"
+    "item_recipe_arcane_boots"              "REMOVE"
+    "item_arcane_boots"                     "REMOVE"
+    "item_orb_of_venom"                     "REMOVE"
+    "item_recipe_ancient_janggo"            "REMOVE"
+    "item_ancient_janggo"                   "REMOVE"
+    "item_recipe_medallion_of_courage"      "REMOVE"
+    "item_medallion_of_courage"             "REMOVE"
+    "item_smoke_of_deceit"                  "REMOVE"
+    "item_recipe_veil_of_discord"           "REMOVE"
+    "item_veil_of_discord"                  "REMOVE"
+    "item_recipe_rod_of_atos"               "REMOVE"
+    "item_rod_of_atos"                      "REMOVE"
+    "item_recipe_abyssal_blade"             "REMOVE"
+    "item_abyssal_blade"                    "REMOVE"
+    "item_recipe_heavens_halberd"           "REMOVE"
+    "item_heavens_halberd"                  "REMOVE"
+    "item_recipe_ring_of_aquila"            "REMOVE"
+    "item_ring_of_aquila"                   "REMOVE"
+    "item_recipe_tranquil_boots"            "REMOVE"
+    "item_tranquil_boots"                   "REMOVE"
+    "item_shadow_amulet"                    "REMOVE"
+    "item_halloween_candy_corn"             "REMOVE"
+    "item_mystery_hook"                     "REMOVE"
+    "item_mystery_arrow"                    "REMOVE"
+    "item_mystery_missile"                  "REMOVE"
+    "item_mystery_toss"                     "REMOVE"
+    "item_mystery_vacuum"                   "REMOVE"
+    "item_halloween_rapier"                 "REMOVE"
+    "item_greevil_whistle"                  "REMOVE"
+    "item_greevil_whistle_toggle"           "REMOVE"
+    "item_present"                          "REMOVE"
+    "item_winter_stocking"                  "REMOVE"
+    "item_winter_skates"                    "REMOVE"
+    "item_winter_cake"                      "REMOVE"
+    "item_winter_cookie"                    "REMOVE"
+    "item_winter_coco"                      "REMOVE"
+    "item_winter_ham"                       "REMOVE"
+    "item_winter_kringle"                   "REMOVE"
+    "item_winter_mushroom"                  "REMOVE"
+    "item_winter_greevil_treat"             "REMOVE"
+    "item_winter_greevil_garbage"           "REMOVE"
+    "item_winter_greevil_chewy"             "REMOVE"
+
+    // 6.87 fucking items
+    "item_recipe_bloodthorn"                "REMOVE"
+    "item_bloodthorn"                       "REMOVE"
+    "item_wind_lace"                        "REMOVE"
+    "item_infused_raindrop"                 "REMOVE"
+    "item_blight_stone"                     "REMOVE"
+    "item_recipe_echo_sabre"                "REMOVE"
+    "item_echo_sabre"                       "REMOVE"
+    "item_tome_of_knowledge"                "REMOVE"
+    "item_recipe_hurricane_pike"            "REMOVE"
+    "item_hurricane_pike"                   "REMOVE"
+    "item_banana"                           "REMOVE"
+}

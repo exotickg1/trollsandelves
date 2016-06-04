@@ -2,6 +2,7 @@
 
 GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_PROTECT, false );
 GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_COURIER, false );
+GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_SHOP_SUGGESTEDITEMS, false );
 GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_QUICKBUY, false );
 GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_GOLD, false );
 
@@ -13,22 +14,16 @@ function OnPlayerLumberChanged ( args ) {
 	CheckHudFlipped();
 }
 
-function OnPlayerGoldChanged ( args ) {
-    var iPlayerID = Players.GetLocalPlayer()
-    var gold = args.gold
-    //$.Msg("Player "+iPlayerID+" Gold: "+gold)
-    $('#GoldText').text = gold
-    CheckHudFlipped();
-}
-
-function UpdateGold() {
+function UpdateGold()
+{
 	var iPlayerID = Players.GetLocalPlayer()
 	var gold = Players.GetGold( iPlayerID )
 	$('#GoldText').text = gold
 	$.Schedule( 0.1, UpdateGold );
 }
 
-function UpdateClock() {
+function UpdateClock()
+{
     var DotaTime = Game.GetDOTATime( false, true )
     var Seconds = DotaTime.toFixed(0)
     var Minutes = Math.floor(Seconds / 60)
@@ -107,6 +102,6 @@ function HighlightResources() {
 	CheckHudFlipped();
 	GameEvents.Subscribe( "player_lumber_changed", OnPlayerLumberChanged );
 	GameEvents.Subscribe( "player_food_changed", OnPlayerFoodChanged );
-    GameEvents.Subscribe( "player_custom_gold_changed", OnPlayerGoldChanged );
+
     GameEvents.Subscribe( "highlight_resource_panel", HighlightResources );
 })();

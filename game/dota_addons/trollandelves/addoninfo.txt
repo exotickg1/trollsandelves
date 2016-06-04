@@ -1,0 +1,9 @@
+"AddonInfo"
+{
+  "TeamCount" "2"
+  "maps"      "trollsandelves"
+  "IsPlayable"  "1"
+  "trollsandelves"
+  {
+          "MaxPlayers"                    "12"
+  }
