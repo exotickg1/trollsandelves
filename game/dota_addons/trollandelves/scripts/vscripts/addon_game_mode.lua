@@ -3,7 +3,6 @@
 require('internal/util')
 require('gamemode')
 require('libraries/buildinghelper')
-require('utils/musicsystem')
 
 function Precache( context )
 --[[

@@ -1930,7 +1930,7 @@
       {
         "01"
         {
-          "var_type" "FIELD_INTEGER"
+          "var_type"    "FIELD_INTEGER"
           "bonus_regen" "4"
         }
       }
@@ -2360,6 +2360,65 @@
                 "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%bonus_regen"
             }
         } 
+    }
+  }
+
+
+  //--------------------------------
+  //Items for Building Queue
+  //--------------------------------
+  "item_building_cancel"
+  {
+    "BaseClass"                 "item_datadriven"
+    "AbilityTextureName"      "item_cancel"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+    "AbilityCastPoint"        "0"
+
+    "ItemDroppable"         "0"
+    "ItemPurchasable"         "0"
+    "ItemSellable"          "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "builder.lua"
+        "Function"    "CancelBuilding"
+      }
+    }
+  }
+
+  "item_upgrade_rock1"
+  {
+    "BaseClass"                 "item_datadriven"
+    "AbilityTextureName"      "item_upgrade_rock1"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+    "AbilityCastPoint"        "0"
+  
+    "ItemDroppable"         "0"
+    "ItemPurchasable"         "0"
+    "ItemSellable"          "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "buildings/queue.lua"
+        "Function"    "DequeueUnit"
+      }
+  
+      // Re-enable abilities
+      "RunScript"
+      {
+        "ScriptFile"  "buildings/upgrades.lua"
+        "Function"    "CancelUpgrade"
+      }
+  
+      "RemoveModifier"
+      {
+        "ModifierName"  "modifier_building_particle"
+        "Target"    "CASTER"
+      }
     }
   }
 

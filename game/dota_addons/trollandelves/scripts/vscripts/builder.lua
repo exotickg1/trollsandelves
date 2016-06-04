@@ -153,3 +153,43 @@ function SendErrorMessage( pID, string )
     Notifications:Bottom(pID, {text=string, style={color='#E62020'}, duration=2})
     EmitSoundOnClient("General.Cancel", PlayerResource:GetPlayer(pID))
 end
+
+function UpgradeBuilding( event )
+    local building = event.caster
+    local NewBuildingName = event.NewName
+    local hero = building:GetOwner()
+    local player = building:GetPlayerOwner()
+    local playerID = player:GetPlayerID()
+    local upgrades = BuildingHelper.KV[building:GetUnitName()].Upgrades
+    local buildTime = BuildingHelper.UnitKV[NewBuildingName]["BuildTime"]
+    local gold_cost
+    local lumber_cost
+    -- I do it like this so you are able to have two buildings upgrade into the same upgraded building with different prices and only having one ability
+    local count = tonumber(upgrades.Count)
+    for i = 1, count, 1 do
+        local upgrade = upgrades[tostring(i)]
+        local upgraded_unit_name = upgrade.unit_name
+        if upgraded_unit_name == NewBuildingName then
+            gold_cost = upgrade.gold_cost
+            lumber_cost = upgrade.lumber_cost
+        end
+    end
+    if gold_cost > hero.gold then
+        SendErrorMessage(playerID, "#error_not_enough_gold")
+        return false
+    end
+    if lumber_cost > hero.lumber then
+        SendErrorMessage(playerID, "#error_not_enough_lumber")
+        return false
+    end
+    local newBuilding = BuildingHelper:UpgradeBuilding(building,NewBuildingName)
+    
+    modifyGold(hero,-gold_cost)
+    modifyLumber(hero,-lumber_cost)
+    Timers:CreateTimer(buildTime,function()
+        for key,value in pairs(hero.units) do
+            UpdateUpgrades(value)
+        end
+        UpdateSpells(hero)
+    end)
+end

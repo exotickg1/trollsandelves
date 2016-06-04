@@ -30,10 +30,10 @@ require('libraries/modmaker')
 require('libraries/pathgraph')
 -- This library (by Noya) provides player selection inspection and management from server lua
 require('libraries/selection')
-
--- Custom music background
-require('utils/musicsystem')
-
+-- This library for Notification and popups....
+require('libraries/popups')
+-- This library add some functions
+require('libraries/players')
 -- These internal libraries set up barebones's events and processes.  Feel free to inspect them/change them if you need to.
 require('internal/gamemode')
 require('internal/events')
@@ -42,6 +42,9 @@ require('internal/events')
 require('settings')
 -- events.lua is where you can specify the actions to be taken when any event occurs and is one of the core barebones files.
 require('events')
+
+-- main file of troll and elves
+require('main')
 
 
 -- This is a detailed example of many of the containers.lua possibilities, but only activates if you use the provided "playground" map
@@ -108,8 +111,15 @@ function GameMode:OnHeroInGame(hero)
   local item = CreateItem("item_example_item", hero, hero)
   hero:AddItem(item)
 
-  -- Music BGM
-  InitBackGroundMusic()
+  -- Learn all spells my friend
+  for i=0,15 do
+    local ability = hero:GetAbilityByIndex(i)
+    if ability then 
+        ability:SetLevel(ability:GetMaxLevel())
+        -- Delete Ability Points (Level up)
+        hero:SetAbilityPoints(0)
+    end
+  end
 
   --[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
     --with the "example_ability" ability

@@ -6,7 +6,10 @@
         "selection",
         "construction_size",
         "building_settings",
+       	"requirements",
+		"upgrades",
+		"upgrade_costs",
         "food",
-		"lumber",
+		"lumber"
     ]
 } 

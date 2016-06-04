@@ -12,7 +12,7 @@
   "BaseClass" "ability_datadriven"
   "MaxLevel"  "1"
   "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  "AbilityTextureName"  "alchemist_goblins_greed"
+  "AbilityTextureName"  "troll_plunder"
   "Modifiers"
   {
     "modifier_plunder"
@@ -34,8 +34,8 @@
 
 "troll_invis"
 {
-  "BaseClass"           "clinkz_wind_walk"
-  "AbilityTextureName"  "clinkz_wind_walk"
+  "BaseClass"           "ability_datadriven"
+  "AbilityTextureName"  "troll_invis"
   "MaxLevel"            "1"
   "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 
@@ -49,13 +49,33 @@
       "01"
       {
         "var_type"  "FIELD_INTEGER"
-        "duration"  "15"
+        "duration"  "25"
       }
       "02"
       {
         "var_type"   "FIELD_INTEGER"
-        "bonus_movespeed"    "50"
+        "bonus_movespeed"    "20"
       }
+  }
+
+  "precache"
+  {
+    "particle"    "particles/econ/courier/courier_roshan_frost/courier_roshan_frost_ambient.vpcf"
+    "soundfile"   "soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts"
+  }
+
+  "OnSpellStart"
+  {
+   "FireSound"
+   {
+    "EffectName"    "Hero_TemplarAssassin.Meld"
+    "Target"        "CASTER"
+   }
+   "RunScript"
+   {
+    "ScriptFile"    "abilities/ability_invis.lua"
+    "Function"      "invis_cast"
+   }
   }
 
   "Modifiers"
@@ -63,7 +83,20 @@
       "modifier_troll_invis"
       {
         "IsBuff"    "1"
+        "IsHidden"  "1"
         "Duration" "%duration"
+        "EffectName"    "particles/econ/courier/courier_roshan_frost/courier_roshan_frost_ambient.vpcf"
+        "EffectAttachType"  "follow_origin"
+
+        "OnCreated"
+        {
+          "FireEffect"
+          {
+            "EffectName"  "particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk_smoke.vpcf"
+            "EffectAttachType" "follow_hitloc"
+            "Target" "CASTER"
+          }
+        }
 
         "Properties"
         {
@@ -73,22 +106,114 @@
         "States"
         {
           "MODIFIER_STATE_INVISIBLE" "MODIFIER_STATE_VALUE_ENABLED"
-          "MODIFIER_STATE_NO_UNIT_COLLISION" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+
+        "OnAttackLanded"
+        {
+          "RunScript"
+            {
+            "ScriptFile"  "abilities/ability_invis.lua"
+            "Function"    "invis_attack"
+            }
+        }
+
+        "OnAbilityExecuted"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "abilities/ability_invis.lua"
+            "Function"    "invis_interrupt"
+          }
         }
       }
   }
 }
 
+"troll_hex"
+{
+  // General
+  //-------------------------------------------------------------------------------------------------------------
+  "BaseClass"               "ability_datadriven"
+  "MaxLevel"                "1"
+  "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  "AbilityUnitTargetTeam"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+  "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+  "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+  "FightRecapLevel"         "1"
+  "AbilityTextureName"      "troll_hex"
+
+  // Casting
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityCastRange"        "500"
+  "AbilityCastPoint"        "0"
+  
+  // Time   
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityCooldown"       "60"
+
+  // Cost
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityManaCost"       "0"
+
+  // Special
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"          "FIELD_INTEGER"
+      "movespeed"         "200"
+    }
+    "02"
+    {
+      "var_type"          "FIELD_FLOAT"
+      "duration"          "2.5"
+    }
+  }
+
+  // Precache
+  //-------------------------------------------------------------------------------------------------------------
+  "precache"
+  {
+    "soundfile"     "soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts"
+    "particle"      "particles/units/heroes/hero_undying/undying_tower_destruction_lv.vpcf"
+    "model"         "models/props_gameplay/chicken.vmdl"
+  }
+
+  "OnSpellStart"
+  {
+    "FireSound"
+    {
+      "EffectName"  "Hero_ShadowShaman.Hex.Target"
+      "Target"      "TARGET"
+    }
+
+    "FireEffect"
+    {
+      "EffectName"        "particles/units/heroes/hero_undying/undying_tower_destruction_lv.vpcf"
+      "EffectAttachType"  "follow_origin"
+      "Target"            "TARGET"
+    }
+
+    "RunScript"
+    {
+      "ScriptFile"  "abilities/ability_hex.lua"
+      "Function"    "voodoo_start"
+      "Target"    "TARGET"
+    }
+  }
+}
+
 "troll_reveal"
 {
-  "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
   "BaseClass"               "ability_datadriven"
-  "AbilityTextureName"      "courier_shield"
+  "AbilityTextureName"      "troll_reveal"
+  "AbilityCastRange"        "GLOBAL"
   "AbilityCastAnimation"    "ACT_DOTA_DISABLED"
 
   "AbilityManaCost"       "0"
   "AbilityCooldown"       "45"
-
   "MaxLevel"            "1"
 
   "precache"
@@ -97,60 +222,67 @@
     "soundfile" "soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
   }
 
-  "AbilitySpecial"
+  "OnSpellStart"
   {
-    "01"
+    "SpawnUnit"
     {
-      "var_type"        "FIELD_INTEGER"
-      "reveal_radius"   "1200"
+      "UnitName"  "npc_vision_reveal"
+      "Target"  "POINT"
+      "Duration"  "10"
+      "UnitCount" "1"
     }
-    "02"
+
+    "FireEffect"
     {
-      "var_type"        "FIELD_INTEGER"
-      "duration"        "6"
+      "EffectName"  "particles/items_fx/dust_of_appearance.vpcf"
+      "EffectAttachType"  "PATTACH_ABSORIGIN"
+      "Target"  "POINT"
     }
   }
+}
 
-  "precache"
-  {
-    "particle"    "particles/units/heroes/hero_rattletrap/clock_loadout_sparks.vpcf"
-  }
-
+"troll_teleport"
+{
+  "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  "BaseClass" "ability_datadriven"
+  "Maxlevel"  "1"
+  "AbilityUnitTargetType" "DOTA_UNIT_TARGET_BUILDING"
+  "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+  "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+  "AbilityCooldown" "60"
   "OnSpellStart"
   {
     "RunScript"
     {
-      "ScriptFile"    "abilities/reveal.lua"
-      "Function"      "Reveal"
-      "Target"        "POINT"
+      "ScriptFile"  "abilities/teleport.lua"
+      "Function"  "OnSpellStart"
+      "Target"  "TARGET"
     }
 
-    "CreateThinker"
-    {
-      "ModifierName"  "modifier_reveal"
-      "Target"        "POINT"
-    }
   }
+}
+
+"gold_gain"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  "AbilityTextureName"    "alchemist_goblins_greed"
+  "MaxLevel"              "1"
 
   "Modifiers"
   {
-    "modifier_reveal"
-    {   
-      "IsHidden"          "1"
-      "Duration"          "%duration"
-      "Aura"              "modifier_reveal_vision"
-      "Aura_Radius"       "%reveal_radius"
-      "Aura_Teams"        "DOTA_UNIT_TARGET_TEAM_ENEMY"
-      "Aura_Types"        "DOTA_UNIT_TARGET_ALL"
-    }
-
-    "modifier_reveal_vision"
+    "modifier_elf_gain_gold"
     {
-      "IsHidden"          "1"
-      "Priority"          "MODIFIER_PRIORITY_ULTRA"
-      "States"
+      "IsHidden"            "1"
+      "Passive"             "1"
+      "ThinkInterval"       "1.0"
+      "OnIntervalThink"
       {
-          "MODIFIER_STATE_INVISIBLE"      "MODIFIER_STATE_VALUE_DISABLED"
+        "RunScript"
+        {
+          "ScriptFile"    "abilities/ability_gold_gain.lua"
+          "Function"      "GoldIncome"
+        }
       }
     }
   }
@@ -183,15 +315,6 @@
   "OverrideBuildingGhost"         "elf_house1"
   "AbilityGoldCost"               "0"
     
-  "OnSpellStart"
-  {
-    "RunScript"
-    {
-        "ScriptFile"        "builder.lua"
-        "Function"          "Build"
-    }
-  }
-
   "AbilitySpecial"
   {
     "01"
@@ -210,6 +333,16 @@
       "lumber_cost"     "0"
     }
   }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+        "ScriptFile"        "builder.lua"
+        "Function"          "Build"
+        "Target"            "TARGET"
+    }
+  }
 }
 
 "build_rock"
@@ -218,7 +351,7 @@
   "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
   "AbilityTextureName"            "elves/rock"
   "MaxLevel"                      "1"
-  "MaxBuildingCount"              "6"
+  "MaxBuildingCount"              "1"
   "HotKeyOverride"                "Z"
   
   "Building"                      "1"
@@ -263,37 +396,72 @@
   }
 }
 
-"unit_destroy"
+"build_tower"
 {
-  // General
-  //-----------------------------
   "BaseClass"                     "ability_datadriven"
-  "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+  "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityTextureName"            "elves/tower"
   "MaxLevel"                      "1"
-  "AbilityTextureName"            "sell_tower"
+  "MaxBuildingCount"              "4"
+  "HotKeyOverride"                "E"
+  
+  "Building"                      "1"
+  "BuildingSize"                  "2"
+  "BuildTime"                     "2.0"
+  "AbilityCastRange"              "200"
+  "AbilityCastPoint"              "0.0"
+  "Scale"                         "1"
+  "PlayerCanControl"              "1"
+  "UpdateHealth"                  "1"
 
+  "UnitName"                      "elf_tower1"
+  "OverrideBuildingGhost"         "elf_tower1"
+  "AbilityGoldCost"               "4"
+    
   "OnSpellStart"
   {
-    "RemoveUnit"
+    "RunScript"
     {
-      "Target"  "CASTER"
+        "ScriptFile"        "builder.lua"
+        "Function"          "Build"
     }
+  }
 
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "4"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
   }
 }
-
 
 //-------------------
 // Building Upgrades section -_-
 //-------------------
 "upgrade_rock1" //upgrade TO rock 2
 {
-  "BaseClass"                 "ability_datadriven"
-  "AbilityTextureName"      "elves/rock"
-  "MaxLevel"            "1"
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
 
-  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
   "AbilityGoldCost"       "8"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
 
   "AbilitySpecial"
   {
@@ -314,48 +482,53 @@
     }
   }
 
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
   "OnSpellStart"
   {
     "RunScript"
     {
-      "ScriptFile"  "libraries/buildinghelper.lua"
-      "Function"    "AddToQueue"
-    }
-
-    //"RunScript"
-    //{
-    //  "ScriptFile"  "buildings/upgrades.lua"
-    //  "Function"    "StartUpgrade"
-    //  "ModifierName"  "modifier_building_particle"
-    //}
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_rock2"
+      "ModifierName"    "modifier_building_particle"
+    }   
   }
 
-  "OnChannelSucceeded"
+  "Modifiers"
   {
-    // Consume the first item in the queue
-    //"RunScript"
-    //{
-    //  "ScriptFile"    "buildings/queue.lua"
-    //  "Function"      "NextQueue"
-    //}
-
-    "RunScript"
+    "modifier_building_particle"
     {
-      "ScriptFile"  "libraries/buildinghelper.lua"
-      "Function"    "UpgradeBuilding"
-      "UnitName"    "elf_rock2"
-    }   
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
   }
 }
 
 "upgrade_rock2" //upgrade TO rock 3
 {
-  "BaseClass"                 "ability_datadriven"
-  "AbilityTextureName"      "elves/rock"
-  "MaxLevel"            "1"
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
 
-  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
   "AbilityGoldCost"       "16"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"       "1"
 
   "AbilitySpecial"
   {
@@ -376,31 +549,13 @@
     }
   }
 
-  "OnSpellStart"
+  "precache"
   {
-    "RunScript"
-    {
-      "ScriptFile"  "buildings/queue.lua"
-      "Function"    "EnqueueUnit"
-    }
-
-    "RunScript"
-    {
-      "ScriptFile"  "buildings/upgrades.lua"
-      "Function"    "StartUpgrade"
-      "ModifierName"  "modifier_building_particle"
-    }
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
   }
 
-  "OnChannelSucceeded"
+  "OnSpellStart"
   {
-    // Consume the first item in the queue
-    "RunScript"
-    {
-      "ScriptFile"    "buildings/queue.lua"
-      "Function"      "NextQueue"
-    }
-
     "RunScript"
     {
       "ScriptFile"  "buildings/upgrades.lua"
@@ -408,16 +563,37 @@
       "UnitName"    "elf_rock3"
     }   
   }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
 }
 
 "upgrade_rock3" //upgrade TO rock 4
 {
-  "BaseClass"                 "ability_datadriven"
-  "AbilityTextureName"      "elves/rock"
-  "MaxLevel"            "1"
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
 
-  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
   "AbilityGoldCost"       "32"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"       "1"
 
   "AbilitySpecial"
   {
@@ -438,31 +614,13 @@
     }
   }
 
-  "OnSpellStart"
+  "precache"
   {
-    "RunScript"
-    {
-      "ScriptFile"  "buildings/queue.lua"
-      "Function"    "EnqueueUnit"
-    }
-
-    "RunScript"
-    {
-      "ScriptFile"  "buildings/upgrades.lua"
-      "Function"    "StartUpgrade"
-      "ModifierName"  "modifier_building_particle"
-    }
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
   }
 
-  "OnChannelSucceeded"
+  "OnSpellStart"
   {
-    // Consume the first item in the queue
-    "RunScript"
-    {
-      "ScriptFile"    "buildings/queue.lua"
-      "Function"      "NextQueue"
-    }
-
     "RunScript"
     {
       "ScriptFile"  "buildings/upgrades.lua"
@@ -470,16 +628,37 @@
       "UnitName"    "elf_rock4"
     }   
   }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
 }
 
 "upgrade_rock4" //upgrade TO rock 5
 {
-  "BaseClass"                 "ability_datadriven"
-  "AbilityTextureName"      "elves/rock"
-  "MaxLevel"            "1"
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
 
-  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
   "AbilityGoldCost"       "64"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"       "1"
 
   "AbilitySpecial"
   {
@@ -500,31 +679,13 @@
     }
   }
 
-  "OnSpellStart"
+  "precache"
   {
-    "RunScript"
-    {
-      "ScriptFile"  "buildings/queue.lua"
-      "Function"    "EnqueueUnit"
-    }
-
-    "RunScript"
-    {
-      "ScriptFile"  "buildings/upgrades.lua"
-      "Function"    "StartUpgrade"
-      "ModifierName"  "modifier_building_particle"
-    }
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
   }
 
-  "OnChannelSucceeded"
+  "OnSpellStart"
   {
-    // Consume the first item in the queue
-    "RunScript"
-    {
-      "ScriptFile"    "buildings/queue.lua"
-      "Function"      "NextQueue"
-    }
-
     "RunScript"
     {
       "ScriptFile"  "buildings/upgrades.lua"
@@ -532,14 +693,1542 @@
       "UnitName"    "elf_rock5"
     }   
   }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock5"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "128"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "128"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock6"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock6"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "256"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "256"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock7"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock7"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "512"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "512"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock8"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock8"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "1024"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "1024"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock9"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock9"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "2048"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "2048"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock10"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock10"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "4096"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "4096"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "32"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock11"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock11"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "8192"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "8192"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "64"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock12"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock12"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "16384"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "16384"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "128"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock13"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock13"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "32768"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "32768"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "256"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock14"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock14"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "65536"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "65536"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "512"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock15"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock15"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "100000"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "100000"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "1024"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock16"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock16"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "131072"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "131072"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "1024"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock17"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock17"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "262144"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "262144"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "2048"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock18"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_rock18"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/rock"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "999999"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "999999"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "999999"
+    }
+  }
+
+  "precache"
+  {
+    "particle"  "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"  "buildings/upgrades.lua"
+      "Function"    "UpgradeBuilding"
+      "UnitName"    "elf_rock19"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"      "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/econ/items/antimage/antimage_weapon_basher_ti5_gold/antimage_manavoid_explode_b_ti_5_gold.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+    }
+  }
 }
 
 
+//-------------------
+// Elf House Upgrades
+//-------------------
 
+"upgrade_house1" //upgrade TO house 2
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
 
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "50"
+  "AbilityChannelTime"    "%build_time"
 
+  "AbilityMultiOrder"     "1"
 
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "50"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
 
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house2"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_house2"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "100"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "100"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house3"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_house3"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "200"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "200"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house4"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_house4"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "400"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "400"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "0"
+    }
+  }
+
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house5"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_house5"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "800"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "800"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "32"
+    }
+  }
+
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house6"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_house6"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "1600"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "1600"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "64"
+    }
+  }
+
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house7"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_house7"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "3200"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "3200"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "128"
+    }
+  }
+
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house8"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_house8"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "6400"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "6400"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "256"
+    }
+  }
+
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house9"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
+
+"upgrade_house9"
+{
+  "BaseClass"             "ability_datadriven"
+  "AbilityTextureName"    "elves/house"
+  "MaxLevel"              "1"
+
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+  
+  "AbilityGoldCost"       "12800"
+  "AbilityChannelTime"    "%build_time"
+
+  "AbilityMultiOrder"     "1"
+
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "build_time"      "2.0" 
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "gold_cost"       "12800"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "lumber_cost"     "512"
+    }
+  }
+
+  "precache"
+  {
+    "particle"          "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+  }
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"      "buildings/upgrades.lua"
+      "Function"        "UpgradeBuilding"
+      "UnitName"        "elf_house10"
+      "ModifierName"    "modifier_building_particle"
+    }   
+  }
+
+  "Modifiers"
+  {
+    "modifier_building_particle"
+    {
+      "IsHidden"        "1"
+
+      "OnCreated"
+      {
+        "AttachEffect"
+        {
+          "EffectName"        "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
+    }
+  }
+}
 
 
   "containers_lua_targeting"
@@ -870,6 +2559,95 @@
   }
 
 
+//-------------------
+// Some Building Helper Abilities
+//-------------------
+  "ability_building"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"            "1"
+
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+    "Modifiers"
+    {
+      "modifier_building"
+      {
+        "Passive"     "1"
+        "IsHidden"      "1"
+        "Attributes"    "MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE | MODIFIER_ATTRIBUTE_PERMANENT" 
+        "States"
+        {
+          "MODIFIER_STATE_MAGIC_IMMUNE" "MODIFIER_STATE_VALUE_ENABLED" // Makes most abilities don't affect this. Use custom damage
+          "MODIFIER_STATE_ROOTED"   "MODIFIER_STATE_VALUE_ENABLED" // Prevents moving
+          "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED" // Allows attacking own buildings
+          "MODIFIER_STATE_LOW_ATTACK_PRIORITY" "MODIFIER_STATE_VALUE_ENABLED" // Makes it a secondary target when A-clicking ground
+          "MODIFIER_STATE_NO_UNIT_COLLISION"  "MODIFIER_STATE_VALUE_ENABLED" // GridNav is blocked
+        }
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE"  "0.1"
+        }
+      }
+    }   
+  }
+
+  "ability_tower"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"            "1"
+
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+    "Modifiers"
+    {
+      "modifier_tower"
+      {
+        "Passive"     "1"
+        "IsHidden"      "1"
+        "Attributes"    "MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE | MODIFIER_ATTRIBUTE_PERMANENT" 
+        "States"
+        {
+          "MODIFIER_STATE_MAGIC_IMMUNE" "MODIFIER_STATE_VALUE_ENABLED" // Makes most abilities don't affect this. Use custom damage
+          "MODIFIER_STATE_ROOTED"   "MODIFIER_STATE_VALUE_ENABLED" // Prevents moving
+          "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED" // Allows attacking own buildings
+          "MODIFIER_STATE_LOW_ATTACK_PRIORITY" "MODIFIER_STATE_VALUE_ENABLED" // Makes it a secondary target when A-clicking ground
+          "MODIFIER_STATE_NO_UNIT_COLLISION"  "MODIFIER_STATE_VALUE_ENABLED" // GridNav is blocked
+        }
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE"  "0.1"
+        }
+      }
+    }   
+  }
+
+  "dummy_tree"
+  {
+      "BaseClass"         "ability_datadriven"
+      "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "Modifiers"
+      {
+          "dummy_modifier"
+          {
+              "Passive"   "1"
+              "States"
+              {
+                  "MODIFIER_STATE_NO_UNIT_COLLISION"  "MODIFIER_STATE_VALUE_ENABLED"
+                  "MODIFIER_STATE_NO_TEAM_MOVE_TO"    "MODIFIER_STATE_VALUE_ENABLED"
+                  "MODIFIER_STATE_NO_TEAM_SELECT" "MODIFIER_STATE_VALUE_ENABLED"
+                  "MODIFIER_STATE_COMMAND_RESTRICTED" "MODIFIER_STATE_VALUE_ENABLED"
+                  "MODIFIER_STATE_ATTACK_IMMUNE"  "MODIFIER_STATE_VALUE_ENABLED"
+                  "MODIFIER_STATE_INVULNERABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+                  //"MODIFIER_STATE_FLYING"   "MODIFIER_STATE_VALUE_ENABLED"
+                  "MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+                  "MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+                  //"MODIFIER_STATE_OUT_OF_GAME"  "MODIFIER_STATE_VALUE_ENABLED"
+                  "MODIFIER_STATE_NO_HEALTH_BAR"         "MODIFIER_STATE_VALUE_ENABLED"
+              }
+          }
+      }
+  }
 
 }
 

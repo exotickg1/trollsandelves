@@ -1,6 +1,63 @@
 buildings stats:
 
 -----------------------------------
+------------ TOWERS ---------------
+-----------------------------------
+ - tower 1:
+ 	16 gold, 10 hp, 1 armor, 1-1 attack
+
+ - tower 2:
+ 	16 gold, 20 hp, 1 armor, 3-3 attack
+
+ - tower 3:
+ 	32 gold, 30 hp, 2 armor, 4-4 attack
+ 	req: Hall
+
+ - tower 4:
+ 	64 gold, 50 hp, 4 armor, 8-8 attack
+
+ - tower 5:
+ 	128 gold, 80 hp, 4 armor, 16 attack
+ 	req: Castle
+
+ - tower 6:
+ 	256 gold, 140 hp, 4 armor, 32 attack
+
+ - tower 7:
+ 	512 gold, 16 lumber, 200 hp, 4 armor, 64 attack
+ 	req: Fortress
+
+ - tower 8:
+ 	1024 gold, 32 lumber, 250 hp, 4 armor, 128 attack
+
+ - tower 9:
+ 	2048 gold, 64 lumber, 500 hp, 4 armor, 401 attack (???)
+ 	req: House 8
+
+ - tower 10:
+ 	4096 gold, 128 lumber, 1000 hp, 4 armor, 701 attack (???)
+ 	req: secret laboratory
+
+ - tower 11:
+ 	6800 gold (???), 512 lumber, 2000 hp, 2 armor (???), 1291 attack (???)
+ 	req: Demonic Wall 3
+
+ - tower 12:
+ 	5000 lumber, 10 hp, 5 armor, 20001 attack
+
+ - tower 13:
+ 	10240 lumber, 25600 hp, 32 armor, 40960 attack
+
+ - tower 14:
+ 	20480 lumber, 51200 hp, 32 armor, 81920 attack
+
+ - tower 15:
+ 	999 9999 gold, 999 999 lumber, 102400 hp, 128 armor, 500100 attack
+
+
+
+
+-----------------------------------
 ------------- ROCKS ---------------
 -----------------------------------
 
@@ -145,3 +202,23 @@ buildings stats:
 
  - calamitous potion ultimate
  	8 lumber, 20480 hps
+
+
+
+
+-----------------------------------
+------ Not Upgradable Towers ------
+-----------------------------------
+
+- True Sight Tower
+10 hp, 0 armor, 50 lumber
+• require Secret Laboratory
+
+- Secret laboratory
+200 hp, 5 armor, 512 lumber
+• require Fortress
+
+- Workers Guild
+30 hp, 5 armor, 32 gold
+
+
